@@ -1,0 +1,503 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  /* English body serif = Source Serif 4; English headings = Spectral — the
+     original, deliberately chosen pairing. Noto Serif SC / Songti SC / Source
+     Han Serif SC are CJK fallbacks only (they never lead the latin stack). */
+  --font-serif: var(--font-source-serif), var(--font-noto-serif-sc), "Songti SC", "Source Han Serif SC", Georgia, serif;
+  --font-heading: var(--font-spectral), var(--font-noto-serif-sc), "Songti SC", "Source Han Serif SC", Georgia, serif;
+  --color-accent: #4a5568;
+  --color-accent-light: #edf2f7;
+  --color-sidebar-bg: #fafafa;
+  --color-sidebar-border: #e2e8f0;
+}
+
+/* Theme tokens keyed by `data-theme` (set pre-paint in layout.tsx and by
+   ThemeProvider). These MUST mirror the color fields in src/lib/theme.ts
+   (THEMES), which supplies the same values to React context for components. */
+:root,
+:root[data-theme="light"] {
+  --theme-bg: #ffffff;
+  --theme-bg-secondary: #fafafa;
+  --theme-text: #1a202c;
+  --theme-text-secondary: #4a5568;
+  --theme-text-muted: #a0aec0;
+  --theme-border: #e2e8f0;
+  --theme-accent: #4a5568;
+  --theme-heading: #5c3d2e;
+  --theme-chapter-label: #6b7280;
+  --theme-card-bg: #f9fafb;
+  --theme-input-bg: #ffffff;
+  --theme-input-border: #e5e7eb;
+  --theme-button-bg: #111827;
+  --theme-button-text: #ffffff;
+  --theme-spine-bg: #ffffff;
+  --theme-spine-text: #374151;
+  --theme-spine-text-secondary: #6b7280;
+  --theme-header-bg: rgba(255, 255, 255, 0.9);
+  --theme-sidebar-bg: #ffffff;
+}
+
+:root[data-theme="parchment"] {
+  --theme-bg: #f5f0e8;
+  --theme-bg-secondary: #ede7db;
+  --theme-text: #3d3229;
+  --theme-text-secondary: #5c4f3d;
+  --theme-text-muted: #8a7e6b;
+  --theme-border: #d4c9b5;
+  --theme-accent: #7c6a4f;
+  --theme-heading: #4a3728;
+  --theme-chapter-label: #7c6a4f;
+  --theme-card-bg: #ede7db;
+  --theme-input-bg: #f5f0e8;
+  --theme-input-border: #d4c9b5;
+  --theme-button-bg: #4a3728;
+  --theme-button-text: #f5f0e8;
+  --theme-spine-bg: #ede7db;
+  --theme-spine-text: #4a3728;
+  --theme-spine-text-secondary: #7c6a4f;
+  --theme-header-bg: rgba(245, 240, 232, 0.9);
+  --theme-sidebar-bg: #f0ebe3;
+}
+
+:root[data-theme="dark"] {
+  --theme-bg: #0f1729;
+  --theme-bg-secondary: #162040;
+  --theme-text: #d1d5db;
+  --theme-text-secondary: #9ca3af;
+  --theme-text-muted: #6b7280;
+  --theme-border: #1e2d4a;
+  --theme-accent: #60a5fa;
+  --theme-heading: #e5c07b;
+  --theme-chapter-label: #9ca3af;
+  --theme-card-bg: #162040;
+  --theme-input-bg: #162040;
+  --theme-input-border: #1e2d4a;
+  --theme-button-bg: #60a5fa;
+  --theme-button-text: #0f1729;
+  --theme-spine-bg: #0c1322;
+  --theme-spine-text: #d1d5db;
+  --theme-spine-text-secondary: #6b7280;
+  --theme-header-bg: rgba(15, 23, 41, 0.9);
+  --theme-sidebar-bg: #0f1729;
+}
+
+/* Paint the page background before React mounts (behind the app shell), so
+   dark/parchment users never see a white flash on load. */
+html {
+  background-color: var(--theme-bg);
+  color: var(--theme-text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Base reading typography */
+.prose-book {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--theme-text, #1a202c);
+  scroll-margin-top: 5rem;
+}
+
+h1, h2, h3, h4, p, figure, blockquote, li, table {
+  scroll-margin-top: 5rem;
+}
+
+.prose-book h1,
+.prose-book h2,
+.prose-book h3,
+.prose-book h4 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  margin-top: 2em;
+  margin-bottom: 0.75em;
+  line-height: 1.3;
+}
+
+.prose-book h1 { font-size: 2.25rem; }
+.prose-book h2 { font-size: 1.75rem; border-bottom: 1px solid var(--theme-border, #e2e8f0); padding-bottom: 0.3em; }
+.prose-book h3 { font-size: 1.375rem; }
+
+.prose-book p {
+  margin-bottom: 1.25em;
+}
+
+.prose-book hr {
+  display: none;
+}
+
+.prose-book blockquote {
+  border-left: 3px solid var(--theme-accent, var(--color-accent));
+  padding-left: 1.25em;
+  margin: 1.5em 0;
+  font-style: italic;
+  color: var(--theme-text-secondary, #4a5568);
+}
+
+.prose-book table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5em 0;
+  font-size: 0.85rem;
+  table-layout: auto;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+.prose-book th,
+.prose-book td {
+  border: 1px solid var(--theme-border, #e2e8f0);
+  padding: 0.5em 0.75em;
+  text-align: left;
+}
+
+.prose-book th {
+  background: var(--theme-bg-secondary, #f7fafc);
+  font-family: var(--font-sans);
+  font-weight: 600;
+}
+
+/* Tables scroll within the text column (same width as figures/text) */
+.prose-book .table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-left: 0;
+  margin-right: 0;
+  max-width: 100%;
+}
+
+.prose-book .table-wrapper table {
+  min-width: 0;
+  font-size: clamp(0.65rem, 1.5vw, 0.8rem);
+  width: 100%;
+}
+
+.prose-book .table-wrapper th,
+.prose-book .table-wrapper td {
+  padding: 0.35em 0.5em;
+  white-space: normal;
+}
+
+/* Figures align to the text column width (no break-out) */
+.prose-book figure {
+  margin-left: 0;
+  margin-right: 0;
+  max-width: 100%;
+}
+
+/* Wide display formulas scroll horizontally within the column instead of
+   overflowing the page. */
+.prose-book .katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+/* Footnote tooltip */
+.footnote-ref {
+  cursor: pointer;
+  color: var(--theme-accent, var(--color-accent));
+  font-size: 0.75em;
+  vertical-align: super;
+  text-decoration: none;
+}
+
+.footnote-ref:hover {
+  text-decoration: underline;
+}
+
+/* Reference list items */
+.ref-item {
+  scroll-margin-top: 5rem;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--theme-text-secondary, #4a5568);
+  margin-bottom: 0.5em;
+}
+
+/* Themed hover surface for nav menu items / buttons */
+.nav-hover { transition: background-color 0.15s ease; }
+.nav-hover:hover { background-color: var(--theme-bg-secondary); }
+
+/* Search-result match highlight */
+.meili-hl { background-color: rgba(176, 112, 59, 0.22); color: inherit; border-radius: 2px; padding: 0 1px; }
+
+/* Ultra-thin (2px) scrollbar for the "on this page" TOC, hidden until hover */
+.toc-scroll {
+  scrollbar-width: thin;                       /* Firefox */
+  scrollbar-color: transparent transparent;    /* thumb hidden by default */
+}
+.toc-scroll:hover {
+  scrollbar-color: rgba(120, 120, 120, 0.5) transparent;
+}
+.toc-scroll::-webkit-scrollbar {
+  width: 0.5px;
+}
+.toc-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.toc-scroll::-webkit-scrollbar-thumb {
+  background-color: transparent;               /* invisible until hover */
+  border-radius: 2px;
+  transition: background-color 0.2s ease;
+}
+.toc-scroll:hover::-webkit-scrollbar-thumb {
+  background-color: rgba(120, 120, 120, 0.5);
+}
+
+/* Mobile reading adjustments */
+@media (max-width: 768px) {
+  .prose-book {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+  }
+
+  .prose-book h1 { font-size: 1.75rem; }
+  .prose-book h2 { font-size: 1.375rem; }
+  .prose-book h3 { font-size: 1.125rem; }
+}
+
+/* Figure and table captions — unified style */
+.prose-book figure + p > strong:first-child,
+.prose-book p > strong:first-child {
+  font-family: var(--font-serif);
+}
+
+/* Figure & table captions — smaller and lighter than body text, for contrast */
+.prose-book figure + p:has(> strong:first-child),
+.prose-book .table-wrapper + p:has(> strong:first-child) {
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: var(--theme-text-secondary, #4a5568);
+}
+
+/* Inline code and fenced code blocks in book prose (e.g. the BibTeX citation
+   on the License page). Theme-aware; blocks scroll horizontally rather than
+   overflow the column. */
+.prose-book code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.85em;
+  background: var(--theme-bg-secondary, #f5f5f5);
+  padding: 0.15em 0.4em;
+  border-radius: 3px;
+}
+.prose-book pre {
+  background: var(--theme-bg-secondary, #f8f8f8);
+  border: 1px solid var(--theme-border, #e2e8f0);
+  border-radius: 8px;
+  padding: 1em 1.25em;
+  margin: 1.5em 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}
+.prose-book pre code {
+  background: none;
+  padding: 0;
+  font-size: inherit;
+}
+
+/* AI chat markdown styles */
+.prose-ai h1, .prose-ai h2, .prose-ai h3 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+.prose-ai h2 { font-size: 1.1rem; }
+.prose-ai h3 { font-size: 1rem; }
+.prose-ai p { margin-bottom: 0.75em; }
+.prose-ai p:last-child { margin-bottom: 0; }
+.prose-ai ul, .prose-ai ol { margin: 0.5em 0; padding-left: 1.5em; }
+.prose-ai ul { list-style-type: disc; }
+.prose-ai ol { list-style-type: decimal; }
+.prose-ai li { margin-bottom: 0.25em; }
+.prose-ai code {
+  background: var(--theme-bg-secondary, #f5f5f5);
+  padding: 0.15em 0.4em;
+  border-radius: 3px;
+  font-size: 0.85em;
+}
+.prose-ai pre {
+  background: var(--theme-bg-secondary, #f8f8f8);
+  padding: 1em;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 0.75em 0;
+}
+.prose-ai pre code {
+  background: none;
+  padding: 0;
+}
+.prose-ai blockquote {
+  border-left: 2px solid var(--theme-border, #e2e8f0);
+  padding-left: 1em;
+  color: var(--theme-text-secondary, #718096);
+  margin: 0.75em 0;
+}
+.prose-ai strong { font-weight: 600; }
+.prose-ai table { width: 100%; border-collapse: collapse; margin: 0.75em 0; font-size: 0.85em; display: block; overflow-x: auto; }
+.prose-ai th, .prose-ai td { border: 1px solid var(--theme-border, #e2e8f0); padding: 0.4em 0.6em; text-align: left; white-space: nowrap; }
+.prose-ai th { background: var(--theme-bg-secondary, #f7fafc); font-weight: 600; }
+.prose-ai td { white-space: normal; word-break: normal; }
+
+/* Fade-in animation (used by ProactiveCard) */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ── Brand logo (∞ lemniscate) ─────────────────────────────────────────────
+   Spec v1.0: core loop colors are theme-invariant and double as the site's
+   long/short semantic tokens. Glint: a single highlight patrols the ∞ —
+   green transits the right loop in the first half of the 4.2 s cycle, red
+   the left loop in the second half; dash gap > 1 keeps at most one dash on
+   a path and parks it fully off-path between sweeps (offsets 0.35 / −1.05
+   are both outside the normalized [0,1] path). dashoffset only → GPU-cheap. */
+:root {
+  --logo-long: #4f6d48;
+  --logo-short: #a34a33;
+}
+
+.logo-glint {
+  stroke-dasharray: 0.3 1.1;
+  animation: logo-glint-long 4.2s linear infinite;
+}
+.logo-glint-short { animation-name: logo-glint-short; }
+
+@keyframes logo-glint-long {
+  0% { stroke-dashoffset: 0.35; }
+  50%, 100% { stroke-dashoffset: -1.05; }
+}
+@keyframes logo-glint-short {
+  0%, 50% { stroke-dashoffset: 0.35; }
+  100% { stroke-dashoffset: -1.05; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-glint { display: none; }
+}
+
+/* ── Labs arcade skin ──────────────────────────────────────────────────────
+   Game pages wrap themselves in .arcade, which re-binds the site's theme
+   tokens to a fixed dark trading-terminal palette — the bookish pages keep
+   their three themes, games always render the arcade. High-saturation
+   up/down colors are game-only tokens (the muted book palette stays muted). */
+.arcade {
+  --theme-bg: #070b16;
+  --theme-bg-secondary: #0d1526;
+  --theme-text: #e2e8f0;
+  --theme-text-secondary: #94a3b8;
+  --theme-text-muted: #64748b;
+  --theme-border: #1c2a45;
+  --theme-accent: #38bdf8;
+  --theme-heading: #f1f5f9;
+  --theme-chapter-label: #94a3b8;
+  --theme-card-bg: #0d1526;
+  --theme-input-bg: #0d1526;
+  --theme-input-border: #1c2a45;
+  --theme-button-bg: #f1f5f9;
+  --theme-button-text: #070b16;
+  --theme-header-bg: rgba(7, 11, 22, 0.92);
+  --arcade-up: #22c55e;
+  --arcade-down: #ef4444;
+  background-color: var(--theme-bg);
+  color: var(--theme-text);
+}
+.arcade .num {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-variant-numeric: tabular-nums;
+}
+.arcade-glow-up { text-shadow: 0 0 14px rgba(34, 197, 94, 0.55); }
+.arcade-glow-down { text-shadow: 0 0 14px rgba(239, 68, 68, 0.55); }
+
+@keyframes arcade-shake {
+  0%, 100% { transform: translate(0, 0); }
+  15% { transform: translate(-7px, 2px); }
+  30% { transform: translate(6px, -3px); }
+  45% { transform: translate(-5px, -2px); }
+  60% { transform: translate(4px, 3px); }
+  75% { transform: translate(-3px, 1px); }
+  90% { transform: translate(2px, -1px); }
+}
+.arcade-shake { animation: arcade-shake 0.45s ease-in-out; }
+
+@keyframes confetti-rise {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(-140px) rotate(320deg); opacity: 0; }
+}
+.confetti { animation: confetti-rise 1.4s ease-out forwards; }
+
+@media (prefers-reduced-motion: reduce) {
+  .arcade-shake { animation: none; }
+  .confetti { animation: none; opacity: 0; }
+}
+
+/* ── shadcn/ui token bridge ────────────────────────────────────────────────
+   shadcn components consume semantic tokens (bg-primary, border-input, …).
+   Every one of them resolves — at the ELEMENT where it's used — to our
+   runtime theme variables, so all three reading themes and the .arcade
+   override style shadcn controls with zero extra wiring. */
+:root {
+  --background: var(--theme-bg);
+  --foreground: var(--theme-text);
+  --card: var(--theme-card-bg);
+  --card-foreground: var(--theme-text);
+  --popover: var(--theme-card-bg);
+  --popover-foreground: var(--theme-text);
+  --primary: var(--theme-button-bg);
+  --primary-foreground: var(--theme-button-text);
+  --secondary: var(--theme-bg-secondary);
+  --secondary-foreground: var(--theme-text);
+  --muted: var(--theme-bg-secondary);
+  --muted-foreground: var(--theme-text-muted);
+  --accent: var(--theme-bg-secondary);
+  --accent-foreground: var(--theme-heading);
+  --destructive: var(--logo-short);
+  --destructive-foreground: #ffffff;
+  --border: var(--theme-border);
+  --input: var(--theme-input-border);
+  --ring: var(--theme-accent);
+  --radius: 0.5rem;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) * 0.75);
+  --radius-md: calc(var(--radius) * 0.875);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.5);
+}
+
+/* Hide the scrollbar rail but keep the area scrollable (wheel/touch/keys).
+   Used while the AI panel is open, where two adjacent rails look broken. */
+.no-scrollbar {
+  scrollbar-width: none;      /* Firefox */
+  -ms-overflow-style: none;   /* legacy Edge */
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}

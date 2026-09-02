@@ -1,0 +1,61 @@
+name: 📖 Errata — something in the book is wrong
+description: A wrong number, broken formula, dead citation, or mistaken claim
+title: "Errata: ch<N> — <short description>"
+labels: ["errata"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Fidelity to the mechanism is the whole point of this book, so thank you for this.
+
+        Typos and obviously broken links don't need an issue — open a PR directly. Use this form
+        for anything substantive, so it can be discussed before the text changes.
+
+  - type: dropdown
+    id: language
+    attributes:
+      label: Edition
+      options:
+        - English
+        - Chinese
+        - Both
+        - Another translation
+    validations:
+      required: true
+
+  - type: input
+    id: location
+    attributes:
+      label: Where
+      description: Chapter and section number, plus a URL if you have one.
+      placeholder: "Chapter 11, §11.2 — https://permissionless.fi/en/11-..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: passage
+    attributes:
+      label: The passage
+      description: Quote the sentence, formula, figure, or caption as it currently reads.
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What's wrong, and what should it say?
+      description: >
+        Be as specific as you can. For a number or a date, a source makes this easy to act on.
+        For a mechanism described incorrectly, explain the correct behavior — that discussion is
+        welcome even if we end up disagreeing.
+    validations:
+      required: true
+
+  - type: input
+    id: source
+    attributes:
+      label: Source (optional)
+      description: A paper, exchange documentation, on-chain data, or similar.
+    validations:
+      required: false

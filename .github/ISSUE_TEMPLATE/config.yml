@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 🌍 Translations already in progress
+    url: https://github.com/PermissionlessFi/permissionless-finance-web/issues?q=is%3Aissue+label%3Atranslation
+    about: Check whether your language is already claimed — join that thread instead of opening a new one.
+  - name: 📚 Read the book
+    url: https://permissionless.fi
+    about: The full book, free, in English and Chinese — with the glossary and interactive Labs.
+  - name: 💬 Follow on X
+    url: https://x.com/PermlessFi
+    about: New material, errata, and research notes.

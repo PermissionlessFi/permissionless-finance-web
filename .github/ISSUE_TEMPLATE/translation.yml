@@ -1,0 +1,80 @@
+name: 🌍 Translation claim
+description: Claim a language, or join one already in progress
+title: "Translation: <Language>"
+labels: ["translation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping the book speak another language.
+
+        Please put the language in the **title** — e.g. `Translation: Español`. That's what other
+        translators search for. Before opening, have a quick look at the existing
+        [translation issues](../?q=is%3Aissue+label%3Atranslation) — if your language is already
+        claimed, join that thread instead of opening a new one.
+
+        The full guide lives in [CONTRIBUTING.md](../blob/main/CONTRIBUTING.md#translations).
+
+  - type: input
+    id: language
+    attributes:
+      label: Language
+      description: The language's own name, plus its ISO 639-1 code.
+      placeholder: Español (es)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: What are you planning to take on?
+      description: A partial contribution is genuinely useful — please don't over-commit.
+      options:
+        - Preface + Part I (chapters 1–3) — the recommended starting point
+        - One specific part
+        - Several parts
+        - The whole book
+        - Not sure yet — I want to help, happy to be pointed somewhere
+    validations:
+      required: true
+
+  - type: textarea
+    id: background
+    attributes:
+      label: Background (optional)
+      description: >
+        Anything that helps us review well — familiarity with market microstructure or
+        trading, previous translation work, whether you're a native speaker of the target language.
+        No credentials required; this just tells us how much terminology context to offer.
+    validations:
+      required: false
+
+  - type: textarea
+    id: terminology
+    attributes:
+      label: Terminology questions (optional)
+      description: >
+        The book is careful about distinctions many texts blur — *clearing* vs *settlement* vs
+        *liquidation* above all. If your language collapses any of these, or you're unsure how to
+        render a core term, raise it here and we'll settle on a convention before you translate at
+        scale.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: acknowledgements
+    attributes:
+      label: Before you start
+      options:
+        - label: >
+            I've read the [translation guide](../blob/main/CONTRIBUTING.md#translations) and will
+            keep figures, formulas, citation markers `[1]`, and heading numbering intact.
+          required: true
+        - label: >
+            I understand translators are credited as the authors of their edition, and that my
+            contribution is licensed under CC BY 4.0.
+          required: true
+        - label: >
+            If I use machine translation as a starting point, I'll say so and will read and correct
+            every paragraph myself.
+          required: true

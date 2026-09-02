@@ -1,0 +1,41 @@
+name: 🐛 Website or Labs issue
+description: Something on the reader, a simulator, search, or the AI panel isn't working
+title: "Site: <short description>"
+labels: ["website"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        For problems with the site itself rather than the book's text. If a *fact in the book* is
+        wrong, use the Errata form instead.
+
+  - type: input
+    id: url
+    attributes:
+      label: Page URL
+      placeholder: https://permissionless.fi/labs/liquidation-cascade
+    validations:
+      required: true
+
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what did you expect?
+      description: Steps to reproduce help enormously — a simulator's parameters, or what you clicked.
+    validations:
+      required: true
+
+  - type: input
+    id: env
+    attributes:
+      label: Browser & device
+      placeholder: Safari 18, iPhone / Chrome 130, macOS
+    validations:
+      required: false
+
+  - type: markdown
+    attributes:
+      value: |
+        **Note on the simulators:** the Labs are *teaching models, not trading models* — they
+        deliberately simplify. If a result looks unrealistic, it may still be intentional. Tell us
+        what you expected and why; that's a useful conversation either way.
