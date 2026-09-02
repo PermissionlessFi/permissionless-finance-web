@@ -16,12 +16,15 @@ export default function ChapterTemplate({ children }: { children: React.ReactNod
     if (!el) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
+    // Opacity only — deliberately no transform. The reading shell is exactly
+    // `h-screen`, so the document has no scrollbar at rest; translating it
+    // downward would add its offset to the document's *scrollable overflow*
+    // (transforms don't affect layout, but they do extend the scroll area),
+    // spawning a scrollbar for the length of the animation and snapping the
+    // centered column sideways when it disappears.
     const anim = el.animate(
-      [
-        { opacity: 0, transform: "translateY(16px)" },
-        { opacity: 1, transform: "translateY(0)" },
-      ],
-      { duration: 480, easing: "cubic-bezier(0.16, 1, 0.3, 1)", fill: "backwards" },
+      [{ opacity: 0 }, { opacity: 1 }],
+      { duration: 420, easing: "cubic-bezier(0.16, 1, 0.3, 1)", fill: "backwards" },
     );
     return () => anim.cancel();
   }, []);
