@@ -123,5 +123,12 @@ contributors here are working in their second or third language.
 
 ## License
 
-By contributing, you agree that your contributions are licensed under
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), the same license as the book.
+By contributing, you agree that your contribution is licensed under whichever license covers the
+part of the project you touched:
+
+- **Book content** — translations, errata, anything under `content/`, `public/images/`, or
+  `public/downloads/` — is licensed under
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), the same license as the book
+  ([`LICENSE`](LICENSE)).
+- **Website code** — `src/`, `scripts/`, configuration — is licensed under
+  [MIT](https://opensource.org/licenses/MIT) ([`LICENSE-CODE`](LICENSE-CODE)).

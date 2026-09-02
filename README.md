@@ -121,7 +121,14 @@ See **[CONTRIBUTING.md](CONTRIBUTING.md)** for the full guide.
 
 <a href="https://creativecommons.org/licenses/by/4.0/"><img align="right" width="88" height="31" src="https://mirrors.creativecommons.org/presskit/buttons/88x31/svg/by.svg" alt="CC BY 4.0"></a>
 
-The book's text and figures are licensed under the **[Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/)**. You are free to **share** and **adapt** the work — including translating it — for any purpose, even commercially, as long as you give appropriate credit. The website source code is provided under the same spirit of openness.
+Two licenses, both permissive:
+
+| What | License | Where |
+|---|---|---|
+| **The book** — text, figures, PDF/EPUB (`content/`, `public/images/`, `public/downloads/`) | **[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)** | [`LICENSE`](LICENSE) |
+| **The website** — the Next.js app (`src/`, `scripts/`, config) | **[MIT](https://opensource.org/licenses/MIT)** | [`LICENSE-CODE`](LICENSE-CODE) |
+
+You are free to **share** and **adapt** the book — including translating it — for any purpose, even commercially, as long as you give appropriate credit. The code you may use however you like.
 
 ## Author
 
