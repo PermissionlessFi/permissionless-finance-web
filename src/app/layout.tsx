@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Source_Serif_4, Spectral, Noto_Serif_SC } from "next/font/google";
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, AUTHOR_NAME } from "@/lib/site";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { Analytics } from "@vercel/analytics/next";
 // Self-hosted (bundled) KaTeX CSS — must come before globals so our
 // overrides win, and so math still renders when a CDN is blocked.
 import "katex/dist/katex.min.css";
@@ -100,6 +101,8 @@ export default function RootLayout({
       </head>
       <body className="antialiased">
         <ThemeProvider>{children}</ThemeProvider>
+        {/* Cookieless page analytics; no-ops outside Vercel. */}
+        <Analytics />
       </body>
     </html>
   );
