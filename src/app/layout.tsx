@@ -55,7 +55,7 @@ export const metadata: Metadata = {
   ],
   alternates: {
     canonical: "/",
-    // Homepage is one bilingual URL (client-side EN/中文 toggle; server HTML is
+    // Homepage is one bilingual URL (client-side EN/Chinese toggle; server HTML is
     // EN), so only en + x-default are declared — there is no separate zh URL.
     languages: { en: "/", "x-default": "/" },
     types: { "application/rss+xml": "/feed.xml" },
