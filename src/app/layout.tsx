@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Source_Serif_4, Spectral, Noto_Serif_SC } from "next/font/google";
-import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, AUTHOR_NAME } from "@/lib/site";
+import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, AUTHOR_NAME, SITE_X_HANDLE, AUTHOR_X_HANDLE } from "@/lib/site";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -55,6 +55,9 @@ export const metadata: Metadata = {
   ],
   alternates: {
     canonical: "/",
+    // Homepage is one bilingual URL (client-side EN/中文 toggle; server HTML is
+    // EN), so only en + x-default are declared — there is no separate zh URL.
+    languages: { en: "/", "x-default": "/" },
     types: { "application/rss+xml": "/feed.xml" },
   },
   openGraph: {
@@ -66,7 +69,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     alternateLocale: "zh_CN",
   },
-  twitter: { card: "summary_large_image" },
+  twitter: { card: "summary_large_image", site: SITE_X_HANDLE, creator: AUTHOR_X_HANDLE },
   robots: {
     index: true,
     follow: true,
