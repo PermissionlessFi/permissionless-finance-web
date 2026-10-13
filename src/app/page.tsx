@@ -8,6 +8,9 @@ import { homeJsonLd } from "@/lib/seo-jsonld";
 import { TopNav } from "@/components/TopNav";
 import { MathBlueprint } from "@/components/MathBlueprint";
 import { LogoMark, LogoLockup } from "@/components/BrandLogo";
+import { XIcon } from "@/components/BrandIcons";
+import { COMMUNITY_LINKS } from "@/lib/external";
+import { AUTHOR_X_URL, AUTHOR_NAME } from "@/lib/site";
 
 // Built once; static first-party data (safe to serialize). Client components
 // are still server-rendered, so this ships in the initial HTML for crawlers.
@@ -131,6 +134,20 @@ export default function Home() {
           </div>
         </div>
       </main>
+
+      {/* Site footer — visible entity links (rel="me") to the project and
+          author X profiles; mirrors Organization/Person sameAs in JSON-LD. */}
+      <footer
+        className="relative z-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 px-6 py-6 text-xs"
+        style={{ fontFamily: "var(--font-heading)", color: theme.textMuted }}
+      >
+        <a href={COMMUNITY_LINKS.x} rel="me noopener" target="_blank" className="inline-flex items-center gap-1.5 hover:underline">
+          <XIcon size={14} /> @PermlessFi
+        </a>
+        <a href={AUTHOR_X_URL} rel="me noopener author" target="_blank" className="inline-flex items-center gap-1.5 hover:underline">
+          <XIcon size={14} /> {AUTHOR_NAME} · @eric_token
+        </a>
+      </footer>
     </div>
   );
 }

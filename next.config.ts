@@ -36,6 +36,8 @@ const nextConfig: NextConfig = {
       beforeFiles: [
         { source: "/:lang(en|zh)/:slug.md", destination: "/api/md/:lang/:slug" },
         { source: "/llms.txt", destination: "/api/llms" },
+        // Conventional llms-full.txt name → English full text (same handler).
+        { source: "/llms-full.txt", destination: "/api/llms-full/en" },
         { source: "/llms-full-:lang(en|zh).txt", destination: "/api/llms-full/:lang" },
         { source: "/feed.xml", destination: "/api/feed" },
       ],

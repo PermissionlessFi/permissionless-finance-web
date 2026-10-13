@@ -1,4 +1,4 @@
-import { SITE_URL, SITE_NAME, BOOK_TITLE, AUTHOR_NAME, AUTHOR_DESCRIPTION, AUTHOR_SAMEAS, LICENSE_URL, SITE_DESCRIPTION } from "./site";
+import { SITE_URL, SITE_NAME, BOOK_TITLE, AUTHOR_NAME, AUTHOR_DESCRIPTION, AUTHOR_SAMEAS, ORG_SAMEAS, LICENSE_URL, SITE_DESCRIPTION } from "./site";
 import { ALL_CHAPTERS, getChapterMeta } from "./toc";
 import { chapterHref } from "./keywords";
 import { FLAGSHIP_KEYWORDS, chapterKeywords, keywordThings } from "./chapter-keywords";
@@ -23,6 +23,20 @@ function personNode() {
   };
 }
 
+/** Project Organization entity (shared @id) — binds the site to @PermlessFi. */
+function orgNode() {
+  return {
+    "@type": "Organization",
+    "@id": `${SITE_URL}/#org`,
+    name: SITE_NAME.en,
+    alternateName: SITE_NAME.zh,
+    url: SITE_URL,
+    logo: `${SITE_URL}/icon.svg`,
+    sameAs: ORG_SAMEAS,
+    founder: { "@id": `${SITE_URL}/#author` },
+  };
+}
+
 /** Book entity — shared @id so every page's structured data joins one graph. */
 function bookNode(lang: Lang) {
   return {
@@ -35,6 +49,7 @@ function bookNode(lang: Lang) {
     isAccessibleForFree: true,
     bookFormat: "https://schema.org/EBook",
     url: SITE_URL,
+    publisher: { "@id": `${SITE_URL}/#org` },
     description: SITE_DESCRIPTION[lang],
     alternateName:
       lang === "zh" ? "永续合约的市场微观结构" : "The Market Microstructure of Perpetual Futures",
@@ -118,7 +133,7 @@ export function homeJsonLd() {
     name: `${SITE_NAME.en} — ${SITE_NAME.zh}`,
     description: SITE_DESCRIPTION.en,
     inLanguage: ["en", "zh-Hans"],
-    publisher: { "@id": `${SITE_URL}/#author` },
+    publisher: { "@id": `${SITE_URL}/#org` },
   };
 
   const author = personNode();
@@ -140,5 +155,5 @@ export function homeJsonLd() {
     ],
   };
 
-  return { "@context": "https://schema.org", "@graph": [website, author, book] };
+  return { "@context": "https://schema.org", "@graph": [website, orgNode(), author, book] };
 }

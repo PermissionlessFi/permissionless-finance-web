@@ -19,7 +19,15 @@ export const AUTHOR_DESCRIPTION =
  * TODO(author): add real URLs (GitHub, X/Twitter, LinkedIn, Google Scholar,
  * ORCID, personal site). Left empty → `sameAs` is omitted until provided.
  */
-export const AUTHOR_SAMEAS: string[] = [];
+export const AUTHOR_SAMEAS: string[] = ["https://x.com/eric_token"];
+
+/** Author / project X handles (twitter:creator / twitter:site). */
+export const AUTHOR_X_HANDLE = "@eric_token";
+export const SITE_X_HANDLE = "@PermlessFi";
+export const AUTHOR_X_URL = "https://x.com/eric_token";
+
+/** Project (Organization) profiles → Organization.sameAs. */
+export const ORG_SAMEAS: string[] = ["https://x.com/PermlessFi", "https://github.com/PermissionlessFi"];
 
 export const SITE_NAME: Record<Lang, string> = {
   zh: "无需许可的金融",

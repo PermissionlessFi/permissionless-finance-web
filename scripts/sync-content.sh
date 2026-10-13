@@ -13,5 +13,6 @@ done
 #   NODE_PATH=web/node_modules node build_pdf/optimize_epub_images.js <src> <out>
 rsync -a --delete /Users/lealzhang/permissionless-v10/build_pdf/epub_build/images/ public/images/
 node scripts/gen-content-dates.mjs
+node scripts/gen-page-dates.mjs
 node scripts/gen-image-dims.mjs
 echo "content synced — rebuild before deploying"

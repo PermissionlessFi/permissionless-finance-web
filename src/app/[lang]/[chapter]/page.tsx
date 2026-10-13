@@ -17,7 +17,7 @@ import { chapterKeywords } from "@/lib/chapter-keywords";
 import { CHAPTER_ABSTRACTS } from "@/lib/chapter-abstracts";
 import { chapterJsonLd } from "@/lib/seo-jsonld";
 import { citationMeta } from "@/lib/citation";
-import { SITE_NAME, SITE_DESCRIPTION, AUTHOR_NAME } from "@/lib/site";
+import { SITE_NAME, SITE_DESCRIPTION, AUTHOR_NAME, SITE_X_HANDLE, AUTHOR_X_HANDLE } from "@/lib/site";
 import { Lang } from "@/lib/types";
 
 const MONTHS_EN = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -91,7 +91,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       locale: lang === "zh" ? "zh_CN" : "en_US",
       ...(modified ? { modifiedTime: modified.toISOString() } : {}),
     },
-    twitter: { card: "summary_large_image", title, description },
+    twitter: { card: "summary_large_image", site: SITE_X_HANDLE, creator: AUTHOR_X_HANDLE, title, description },
   };
 }
 
