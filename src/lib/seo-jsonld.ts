@@ -4,6 +4,7 @@ import { chapterHref } from "./keywords";
 import { FLAGSHIP_KEYWORDS, chapterKeywords, keywordThings } from "./chapter-keywords";
 import { CHAPTER_FAQ } from "./faq";
 import { CHAPTER_ABSTRACTS } from "./chapter-abstracts";
+import { chapterCitation } from "./citation";
 import { Lang } from "./types";
 
 const langTag = (lang: Lang) => (lang === "zh" ? "zh-Hans" : "en");
@@ -80,6 +81,13 @@ export function chapterJsonLd(opts: {
     isPartOf: { "@id": `${SITE_URL}/#book` },
     url: pageUrl,
     inLanguage: langTag(lang),
+    // Authorship + reuse terms on every page node, so an engine that lands on a
+    // single chapter can attribute and cite it without resolving the Book node.
+    author: { "@id": `${SITE_URL}/#author` },
+    publisher: { "@id": `${SITE_URL}/#org` },
+    license: LICENSE_URL,
+    isAccessibleForFree: true,
+    ...(isNumbered ? { creditText: chapterCitation(num, lang).apa } : {}),
     ...(abstract ? { abstract } : {}),
     ...(kw.length ? { keywords: kw.join(", "), about: keywordThings(kw) } : {}),
     ...(modified ? { dateModified: modified.toISOString() } : {}),

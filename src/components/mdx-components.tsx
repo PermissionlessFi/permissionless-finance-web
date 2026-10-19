@@ -7,6 +7,16 @@ import type { Components } from "react-markdown";
 
 const DIMS = imageDims as Record<string, number[]>;
 
+/** react-markdown passes its hast `node` (with full source positions) to every
+ *  custom component. Spreading it onto a host element serialized the whole
+ *  syntax subtree into the RSC payload (and rendered `node="[object Object]"`),
+ *  roughly quadrupling chapter HTML weight. Strip it before spreading. */
+function withoutNode<T extends object>(props: T): Omit<T, "node"> {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { node, ...rest } = props as T & { node?: unknown };
+  return rest;
+}
+
 /** Recursively extract text content from React node tree */
 function getTextContent(node: React.ReactNode): string {
   if (typeof node === "string") return node;
@@ -39,7 +49,7 @@ function headingId(node: React.ReactNode): string {
 export function createMdxComponents(lang: Lang): Components {
   return {
     img: ({ src, alt, ...props }: React.ComponentProps<"img">) => {
-      if (!src || typeof src !== "string") return <img {...props} alt={alt} />;
+      if (!src || typeof src !== "string") return <img {...withoutNode(props)} alt={alt} />;
       const resolved = resolveFigureSrc(src, lang);
       const basename = resolved.src.split("/").pop() || "";
       const dims = DIMS[basename];
@@ -55,11 +65,11 @@ export function createMdxComponents(lang: Lang): Components {
     },
 
     h2: ({ children, ...props }: React.ComponentProps<"h2">) => (
-      <h2 id={headingId(children)} {...props}>{children}</h2>
+      <h2 id={headingId(children)} {...withoutNode(props)}>{children}</h2>
     ),
 
     h3: ({ children, ...props }: React.ComponentProps<"h3">) => (
-      <h3 id={headingId(children)} {...props}>{children}</h3>
+      <h3 id={headingId(children)} {...withoutNode(props)}>{children}</h3>
     ),
 
     a: ({ href, children, ...props }: React.ComponentProps<"a">) => {
@@ -67,7 +77,7 @@ export function createMdxComponents(lang: Lang): Components {
       return (
         <a
           href={href}
-          {...props}
+          {...withoutNode(props)}
           className="text-gray-700 underline underline-offset-2 decoration-gray-300 hover:decoration-gray-600 transition-colors"
           {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
         >
@@ -96,16 +106,16 @@ export function createMdxComponents(lang: Lang): Components {
         const strongText = getTextContent(first);
         const refMatch = strongText.match(/^\[(\d+)\]$/);
         if (refMatch) {
-          return <p id={`ref-${refMatch[1]}`} className="ref-item" {...props}>{children}</p>;
+          return <p id={`ref-${refMatch[1]}`} className="ref-item" {...withoutNode(props)}>{children}</p>;
         }
       }
 
-      return <p {...props}>{children}</p>;
+      return <p {...withoutNode(props)}>{children}</p>;
     },
 
     table: ({ children, ...props }: React.ComponentProps<"table">) => (
       <div className="table-wrapper">
-        <table {...props}>{children}</table>
+        <table {...withoutNode(props)}>{children}</table>
       </div>
     ),
   };

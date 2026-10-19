@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SITE_URL, SITE_NAME } from "@/lib/site";
 import { PUBLISHED_LABS } from "@/lib/labs";
+import { getChapterMeta } from "@/lib/toc";
+import { chapterHref } from "@/lib/keywords";
 import { CascadeLab } from "@/components/labs/CascadeLab";
 import { SurvivorGame } from "@/components/labs/SurvivorGame";
 import { ExecutionDuel } from "@/components/labs/ExecutionDuel";
@@ -36,21 +38,43 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: lab.storyEn,
       url: `/labs/${lab.slug}`,
       siteName: SITE_NAME.en,
+      // Bilingual page (EN default with a client-side Chinese toggle).
+      locale: "en_US",
+      alternateLocale: "zh_CN",
     },
   };
 }
 
 function jsonLd(slug: string) {
   const lab = PUBLISHED_LABS.find((l) => l.slug === slug)!;
+  const url = `${SITE_URL}/labs/${lab.slug}`;
   return {
     "@context": "https://schema.org",
     "@type": "LearningResource",
+    "@id": `${url}#lab`,
     name: `${lab.en} — interactive simulator`,
+    alternateName: lab.zh,
     description: lab.learnEn,
     learningResourceType: "Simulation",
-    url: `${SITE_URL}/labs/${lab.slug}`,
+    interactivityType: "active",
+    inLanguage: ["en", "zh-Hans"],
+    url,
     isAccessibleForFree: true,
-    isPartOf: { "@type": "WebSite", name: SITE_NAME.en, url: SITE_URL },
+    author: { "@id": `${SITE_URL}/#author` },
+    publisher: { "@id": `${SITE_URL}/#org` },
+    isPartOf: { "@type": "WebSite", "@id": `${SITE_URL}/#website`, name: SITE_NAME.en, url: SITE_URL },
+    // The book chapters each simulator dramatizes (the lab -> chapter loop).
+    isBasedOn: lab.chapters.flatMap((num) => {
+      const meta = getChapterMeta(num, "en");
+      return meta
+        ? [{
+            "@type": "Chapter",
+            name: meta.title,
+            url: `${SITE_URL}${chapterHref("en", num)}`,
+            isPartOf: { "@id": `${SITE_URL}/#book` },
+          }]
+        : [];
+    }),
   };
 }
 

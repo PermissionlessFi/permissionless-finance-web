@@ -18,6 +18,8 @@ export const metadata: Metadata = {
     description: "The defined vocabulary of perpetual-futures market microstructure.",
     url: "/glossary",
     siteName: SITE_NAME.en,
+    locale: "en_US",
+    alternateLocale: "zh_CN",
   },
 };
 
