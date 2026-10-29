@@ -1,4 +1,4 @@
-import { SITE_URL, SITE_NAME, BOOK_TITLE, AUTHOR_NAME, AUTHOR_DESCRIPTION, AUTHOR_SAMEAS, ORG_SAMEAS, LICENSE_URL, SITE_DESCRIPTION } from "./site";
+import { SITE_URL, SITE_NAME, BOOK_TITLE, AUTHOR_NAME, AUTHOR_DESCRIPTION, AUTHOR_SAMEAS, AUTHOR_KNOWS_ABOUT, AUTHOR_DISAMBIGUATION, AUTHOR_X_HANDLE, ORG_SAMEAS, LICENSE_URL, SITE_DESCRIPTION } from "./site";
 import { ALL_CHAPTERS, getChapterMeta } from "./toc";
 import { chapterHref } from "./keywords";
 import { FLAGSHIP_KEYWORDS, chapterKeywords, keywordThings } from "./chapter-keywords";
@@ -10,16 +10,31 @@ import { Lang } from "./types";
 const langTag = (lang: Lang) => (lang === "zh" ? "zh-Hans" : "en");
 
 /** The canonical author Person entity (shared @id). `sameAs` is the primary
- *  signal search/AI engines use to resolve a Person to a Knowledge-Graph node;
- *  it is omitted until AUTHOR_SAMEAS in site.ts is populated. */
+ *  signal search/AI engines use to resolve a Person to a Knowledge-Graph node.
+ *  Because other people share the name, the node also carries the X handle as
+ *  an identifier, the book's subject as knowsAbout, the project affiliation,
+ *  the authored Book, and a disambiguatingDescription — all built only from
+ *  identifiers already published on this site. */
 function personNode() {
+  const aboutUrl = `${SITE_URL}${chapterHref("en", "about")}`;
   return {
     "@type": "Person",
     "@id": `${SITE_URL}/#author`,
     name: AUTHOR_NAME,
-    url: `${SITE_URL}/en/about`,
+    url: aboutUrl,
+    mainEntityOfPage: { "@id": `${aboutUrl}#profile` },
     jobTitle: "Author",
     description: AUTHOR_DESCRIPTION,
+    disambiguatingDescription: AUTHOR_DISAMBIGUATION,
+    identifier: {
+      "@type": "PropertyValue",
+      propertyID: "X (Twitter) handle",
+      value: AUTHOR_X_HANDLE,
+      url: AUTHOR_SAMEAS[0],
+    },
+    knowsAbout: AUTHOR_KNOWS_ABOUT,
+    affiliation: { "@id": `${SITE_URL}/#org` },
+    subjectOf: { "@id": `${SITE_URL}/#book` },
     ...(AUTHOR_SAMEAS.length ? { sameAs: AUTHOR_SAMEAS } : {}),
   };
 }
@@ -93,9 +108,18 @@ export function chapterJsonLd(opts: {
     ...(modified ? { dateModified: modified.toISOString() } : {}),
   };
 
+  // The About page is the author's entity page → ProfilePage whose mainEntity
+  // is the Person (Google's recommended markup for profile pages).
   const page = isNumbered
     ? { "@type": "Chapter", position: parseInt(num, 10), ...common }
-    : { "@type": "WebPage", ...common };
+    : num === "about"
+      ? {
+          "@type": "ProfilePage",
+          "@id": `${pageUrl}#profile`,
+          ...common,
+          mainEntity: { "@id": `${SITE_URL}/#author` },
+        }
+      : { "@type": "WebPage", ...common };
 
   const breadcrumb = {
     "@type": "BreadcrumbList",
