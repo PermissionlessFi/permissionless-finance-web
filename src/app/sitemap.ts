@@ -69,6 +69,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/download`, lastModified: pd("/download"), changeFrequency: "monthly", priority: 0.6 },
     { url: `${SITE_URL}/problems`, lastModified: pd("/problems"), changeFrequency: "monthly", priority: 0.6 },
     { url: `${SITE_URL}/glossary`, lastModified: pd("/glossary"), changeFrequency: "monthly", priority: 0.6 },
+    { url: `${SITE_URL}/faq`, lastModified: pd("/faq"), changeFrequency: "monthly", priority: 0.6 },
     { url: `${SITE_URL}/community`, lastModified: pd("/community"), changeFrequency: "monthly", priority: 0.5 },
     { url: `${SITE_URL}/support`, lastModified: pd("/support"), changeFrequency: "monthly", priority: 0.5 },
     { url: `${SITE_URL}/changelog`, lastModified: changelogModified, changeFrequency: "weekly", priority: 0.4 },

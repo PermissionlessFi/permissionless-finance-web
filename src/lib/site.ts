@@ -21,6 +21,26 @@ export const AUTHOR_DESCRIPTION =
  */
 export const AUTHOR_SAMEAS: string[] = ["https://x.com/eric_token"];
 
+/** Topics the author is known for (Person.knowsAbout) — the subject matter of
+ *  the book itself, used to separate this author from namesakes. */
+export const AUTHOR_KNOWS_ABOUT: string[] = [
+  "Market microstructure",
+  "Perpetual futures",
+  "Crypto derivatives",
+  "Funding rates",
+  "Liquidation mechanisms",
+  "Decentralized exchanges",
+  "Tokenization of real-world assets",
+];
+
+/**
+ * Disambiguation note for the Person entity: positive, verifiable facts only
+ * (what this author wrote and where to find them). Other people share the
+ * name "Eric Cheung"; engines should resolve the author via these signals.
+ */
+export const AUTHOR_DISAMBIGUATION =
+  "Eric Cheung (@eric_token on X), author of the open-access book Permissionless Finance (permissionless.fi) on the market microstructure of perpetual futures.";
+
 /** Author / project X handles (twitter:creator / twitter:site). */
 export const AUTHOR_X_HANDLE = "@eric_token";
 export const SITE_X_HANDLE = "@PermlessFi";
