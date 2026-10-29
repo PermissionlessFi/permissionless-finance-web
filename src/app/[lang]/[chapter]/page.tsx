@@ -14,10 +14,10 @@ import { getChapterContent, getChapterDescription, getContentDate, extractHeadin
 import { getChapterMeta, ALL_CHAPTERS } from "@/lib/toc";
 import { SEO_TITLES, chapterPath, chapterHref, resolveChapterParam } from "@/lib/keywords";
 import { chapterKeywords } from "@/lib/chapter-keywords";
-import { CHAPTER_ABSTRACTS } from "@/lib/chapter-abstracts";
+import { chapterMetaDescription } from "@/lib/meta-descriptions";
 import { chapterJsonLd } from "@/lib/seo-jsonld";
 import { citationMeta } from "@/lib/citation";
-import { SITE_NAME, SITE_DESCRIPTION, AUTHOR_NAME, SITE_X_HANDLE, AUTHOR_X_HANDLE } from "@/lib/site";
+import { SITE_NAME, AUTHOR_NAME, SITE_X_HANDLE, AUTHOR_X_HANDLE } from "@/lib/site";
 import { Lang } from "@/lib/types";
 
 const MONTHS_EN = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -26,14 +26,6 @@ function formatUpdated(d: Date | null, lang: Lang): string | null {
   const y = d.getUTCFullYear();
   const m = d.getUTCMonth();
   return lang === "zh" ? `${y} 年 ${m + 1} 月` : `${MONTHS_EN[m]} ${y}`;
-}
-
-/** Trim text to a meta-description length at a word boundary. */
-function clampMeta(text: string, max = 160): string {
-  if (text.length <= max) return text;
-  const cut = text.slice(0, max - 1);
-  const at = cut.lastIndexOf(" ");
-  return (at > max * 0.6 ? cut.slice(0, at) : cut).trimEnd() + "…";
 }
 
 interface PageProps {
@@ -55,12 +47,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   // (tasks/keyword_chapter_map_2026-07.md); H1 keeps the book's own title.
   const baseTitle = lang === "en" && SEO_TITLES[num] ? SEO_TITLES[num] : meta.title;
   const title = `${baseTitle} — ${SITE_NAME[lang]}`;
-  // Prefer the authored, definition-first abstract as the meta description
-  // (keyword-front-loaded); fall back to the auto-extracted opening paragraph.
-  const abstract = CHAPTER_ABSTRACTS[num]?.[lang];
-  const description = abstract
-    ? clampMeta(abstract)
-    : getChapterDescription(lang, num) || SITE_DESCRIPTION[lang];
+  // Hand-written or whole-sentence description derived from the authored,
+  // definition-first abstract (never machine-truncated mid-sentence).
+  const description = chapterMetaDescription(num, lang);
   const path = chapterHref(lang, num);
   const modified = getContentDate(num);
 

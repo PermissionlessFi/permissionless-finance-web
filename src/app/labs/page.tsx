@@ -14,6 +14,8 @@ export const metadata: Metadata = {
     description: "Interactive simulators: liquidation cascades, funding rates, order-book slippage.",
     url: "/labs",
     siteName: SITE_NAME.en,
+    locale: "en_US",
+    alternateLocale: "zh_CN",
   },
 };
 
