@@ -4,7 +4,7 @@ import { SITE_URL, SITE_NAME } from "@/lib/site";
 import { GlossaryView } from "@/components/GlossaryView";
 
 export const metadata: Metadata = {
-  title: "Glossary · 术语表 — Permissionless Finance",
+  title: "Perpetual Futures Glossary · 术语表 — Permissionless Finance",
   description:
     "Definitions of the core terms of perpetual-futures market microstructure — funding rate, liquidation cascade, mark price, order book, and more.",
   keywords: [

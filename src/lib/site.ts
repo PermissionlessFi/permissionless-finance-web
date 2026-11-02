@@ -75,4 +75,8 @@ export const SITE_DESCRIPTION: Record<Lang, string> = {
   en: "An open-access book on the market microstructure of perpetual futures — 33 chapters on funding, liquidation, liquidity, and volatility across on-chain and centralized digital-asset markets. Licensed CC BY 4.0.",
 };
 
+/** Shorter variant for <meta name="description"> (fits search snippets, <=160 chars). */
+export const SITE_META_DESCRIPTION_EN =
+  "Free open-access book on perpetual futures market microstructure: 33 chapters on funding rates, liquidation, margin, liquidity and volatility. CC BY 4.0.";
+
 export const LICENSE_URL = "https://creativecommons.org/licenses/by/4.0/";

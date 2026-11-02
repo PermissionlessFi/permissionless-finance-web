@@ -5,7 +5,7 @@ import { CommunityView } from "@/components/CommunityView";
 export const metadata: Metadata = {
   title: "Community · 社区 — Permissionless Finance",
   description:
-    "Join the community around Permissionless Finance — follow on X, contribute and translate on GitHub, and subscribe to the newsletter or RSS for every update to the open book.",
+    "Join the Permissionless Finance community: follow on X, contribute or translate on GitHub, and subscribe by newsletter or RSS for book updates.",
   alternates: { canonical: "/community" },
   openGraph: {
     type: "website",

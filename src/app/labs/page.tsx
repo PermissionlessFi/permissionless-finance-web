@@ -4,9 +4,9 @@ import { PUBLISHED_LABS } from "@/lib/labs";
 import { LabsView } from "@/components/labs/LabsView";
 
 export const metadata: Metadata = {
-  title: "Labs · 实验室 — Permissionless Finance",
+  title: "Perpetual Futures Simulators · Labs — Permissionless Finance",
   description:
-    "Interactive simulators of the book's mechanisms — trigger a liquidation cascade, play the funding-rate game, walk a market order through the book. Sixty seconds each to one 'so that's why'.",
+    "Interactive perpetual futures simulators: trigger a liquidation cascade, play the funding-rate game, and walk a market order through the order book.",
   alternates: { canonical: "/labs" },
   openGraph: {
     type: "website",
