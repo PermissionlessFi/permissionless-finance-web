@@ -5,7 +5,7 @@ import { SupportView } from "@/components/SupportView";
 export const metadata: Metadata = {
   title: "Support · 支持我们 — Permissionless Finance",
   description:
-    "Permissionless Finance is a free, CC BY 4.0 book. Support it by reading and sharing, contributing on GitHub, translating it, sponsoring the work, or subscribing for updates.",
+    "Permissionless Finance is a free CC BY 4.0 book. Support it by sharing, contributing on GitHub, translating, sponsoring, or subscribing for updates.",
   alternates: { canonical: "/support" },
   openGraph: {
     type: "website",

@@ -4,9 +4,9 @@ import { DOWNLOADS } from "@/lib/external";
 import { DownloadView } from "@/components/DownloadView";
 
 export const metadata: Metadata = {
-  title: "Download · 下载全书 — Permissionless Finance",
+  title: "Free Perpetual Futures Book PDF/EPUB · 下载全书 — Permissionless Finance",
   description:
-    "Download Permissionless Finance free as PDF or EPUB, in English and Chinese, under a CC BY 4.0 open license — all 33 chapters on the market microstructure of perpetual futures.",
+    "Download Permissionless Finance free as PDF or EPUB, in English and Chinese: 33 chapters on perpetual futures market microstructure, CC BY 4.0.",
   alternates: { canonical: "/download" },
   openGraph: {
     type: "website",
