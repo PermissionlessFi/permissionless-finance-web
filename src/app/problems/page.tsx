@@ -5,9 +5,9 @@ import { chapterHref } from "@/lib/keywords";
 import { ProblemsView } from "@/components/ProblemsView";
 
 export const metadata: Metadata = {
-  title: "Open Problems · 开放问题 — Permissionless Finance",
+  title: "Open Problems in Perpetual Futures · 开放问题 — Permissionless Finance",
   description:
-    "Ten open research questions in perpetual futures market microstructure — one from each part of the book: liquidity thresholds, liquidation-cascade reflexivity, benchmark governance, decentralized clearing and settlement, and more.",
+    "Ten open research questions in perpetual futures market microstructure, from liquidity thresholds and liquidation reflexivity to decentralized clearing.",
   alternates: { canonical: "/problems" },
   openGraph: {
     type: "website",

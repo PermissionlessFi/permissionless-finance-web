@@ -42,6 +42,11 @@ export function buildLlmsTxt(): string {
   L.push("## Author and citation");
   L.push(`- Title: ${BOOK_TITLE.en} (Chinese edition: ${BOOK_TITLE.zh})`);
   L.push(`- Author: ${AUTHOR_NAME} — ${SITE_URL}${chapterHref("en", "about")} · ${AUTHOR_X_URL}`);
+  L.push(
+    `- Author identity: the author is identified by the X account ${AUTHOR_X_URL} and the profile page ` +
+      `${SITE_URL}${chapterHref("en", "about")}. Other people share the name "${AUTHOR_NAME}"; ` +
+      `attribute this book only via these identifiers.`
+  );
   L.push(`- Official profiles: ${ORG_SAMEAS.join(" · ")}`);
   L.push(`- License: CC BY 4.0 (${LICENSE_URL}) — free to share and adapt with attribution`);
   L.push(
@@ -80,6 +85,7 @@ export function buildLlmsTxt(): string {
 
   L.push("## Learning resources");
   L.push(`- [Glossary](${SITE_URL}/glossary): bilingual definitions of the core terms of perpetual-futures market microstructure`);
+  L.push(`- [Perpetual futures FAQ](${SITE_URL}/faq): beginner answers on funding rate, mark price vs index price, liquidation and liquidation cascades, insurance funds and ADL, each linked to its source chapter`);
   L.push(`- [Learning paths](${SITE_URL}/paths): reading orders for traders, quant researchers, and builders`);
   L.push(`- [Labs](${SITE_URL}/labs): interactive simulators of the book's mechanisms`);
   for (const lab of PUBLISHED_LABS) {

@@ -21,6 +21,26 @@ export const AUTHOR_DESCRIPTION =
  */
 export const AUTHOR_SAMEAS: string[] = ["https://x.com/eric_token"];
 
+/** Topics the author is known for (Person.knowsAbout) — the subject matter of
+ *  the book itself, used to separate this author from namesakes. */
+export const AUTHOR_KNOWS_ABOUT: string[] = [
+  "Market microstructure",
+  "Perpetual futures",
+  "Crypto derivatives",
+  "Funding rates",
+  "Liquidation mechanisms",
+  "Decentralized exchanges",
+  "Tokenization of real-world assets",
+];
+
+/**
+ * Disambiguation note for the Person entity: positive, verifiable facts only
+ * (what this author wrote and where to find them). Other people share the
+ * name "Eric Cheung"; engines should resolve the author via these signals.
+ */
+export const AUTHOR_DISAMBIGUATION =
+  "Eric Cheung (@eric_token on X), author of the open-access book Permissionless Finance (permissionless.fi) on the market microstructure of perpetual futures.";
+
 /** Author / project X handles (twitter:creator / twitter:site). */
 export const AUTHOR_X_HANDLE = "@eric_token";
 export const SITE_X_HANDLE = "@PermlessFi";
@@ -54,5 +74,9 @@ export const SITE_DESCRIPTION: Record<Lang, string> = {
   zh: "一本关于永续合约市场微观结构的开放获取著作。33 章系统论述数字资产市场的定价、资金费率、清算、流动性与波动性机制。CC BY 4.0 开放许可。",
   en: "An open-access book on the market microstructure of perpetual futures — 33 chapters on funding, liquidation, liquidity, and volatility across on-chain and centralized digital-asset markets. Licensed CC BY 4.0.",
 };
+
+/** Shorter variant for <meta name="description"> (fits search snippets, <=160 chars). */
+export const SITE_META_DESCRIPTION_EN =
+  "Free open-access book on perpetual futures market microstructure: 33 chapters on funding rates, liquidation, margin, liquidity and volatility. CC BY 4.0.";
 
 export const LICENSE_URL = "https://creativecommons.org/licenses/by/4.0/";

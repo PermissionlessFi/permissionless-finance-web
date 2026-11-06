@@ -36,7 +36,7 @@ export const META_DESCRIPTIONS: Record<string, Partial<Record<Lang, string>>> = 
     zh: "永续合约是一种没有到期日与交割日的杠杆衍生品合约，借助多空之间周期性支付的资金费率，将其价格锚定于现货指数。",
   },
   "03": {
-    en: "On-chain finance provides financial functions on public blockchains, where cryptographic consensus rather than institutional reputation supplies trust.",
+    en: "RWA tokenization and on-chain finance: why tokenized Treasuries like BlackRock's BUIDL matter as yield-bearing DeFi collateral, and where their limits lie.",
   },
   "04": {
     en: "Who trades perpetual futures: hedgers, profit-motivated traders, and futile traders, and how their interaction drives liquidity and price discovery.",
@@ -51,13 +51,13 @@ export const META_DESCRIPTIONS: Record<string, Partial<Record<Lang, string>>> = 
     en: "Order book microstructure: how resting limit orders, ranked by price-time priority, turn dispersed private information into spread, depth, and flow signals.",
   },
   "09": {
-    en: "Hyperliquid's on-chain order book reorders transactions by economic intent, placing liquidity-protecting actions ahead of liquidity-consuming ones.",
+    en: "Hyperliquid microstructure explained: an on-chain order book that orders by intent, cancel priority against MEV, the HLP vault and the JELLY episode.",
   },
   "11": {
-    en: "A liquidation cascade is a self-reinforcing loop: forced closing of undercollateralized leveraged positions pushes price further and triggers more liquidations.",
+    en: "Liquidation cascades in crypto perpetual futures: forced closing of leveraged positions pushes price further and triggers more liquidations. How to dampen it.",
   },
   "12": {
-    en: "Auto-deleveraging (ADL) is the last resort of perpetual futures risk: once the insurance fund is exhausted, top-ranked profitable positions are force-closed.",
+    en: "Auto-deleveraging (ADL) in perpetual futures: when the insurance fund runs out, top-ranked profitable positions are force-closed. Who bears the loss, and why.",
   },
   "13": {
     en: "Price discovery: how private information dispersed across many participants is aggregated by market mechanisms into a single public consensus price.",
@@ -97,7 +97,7 @@ export const META_DESCRIPTIONS: Record<string, Partial<Record<Lang, string>>> = 
     en: "Crypto derivatives regulation as an economic problem: repairing perpetual futures market failures without destroying their innovation in price discovery.",
   },
   "27": {
-    en: "A thought experiment: because funding-rate anchoring creates synthetic exposure to any asset, perpetual futures could become a universal pricing layer.",
+    en: "Stock, FX and commodity perpetual futures: a thought experiment on how funding-rate anchoring could make perps a universal pricing layer for global assets.",
   },
   "28": {
     en: "Exchange architecture: how custody, matching, clearing and settlement, data, and governance are split between trusted entities and verifiable code.",

@@ -22,10 +22,12 @@ const VALID_NUMS = new Set(ALL_CHAPTERS.map((c) => c.num));
  *  Chapters absent here already carry their keyword in the original title. */
 export const SEO_TITLES: Record<string, string> = {
   "02": "Perpetual Futures: History and the Rise of Crypto Derivatives",
+  "03": "RWA Tokenization, BUIDL Collateral and On-Chain Finance",
   "06": "Perp DEX vs CEX: The Evolution of Market Structure",
+  "09": "Hyperliquid Microstructure: On-Chain Order Book, HLP, MEV",
   "10": "Funding Rates in Perpetual Futures: A Game-Theoretic Analysis",
-  "11": "Liquidation Cascades: The Endogenous Reflexivity of Leverage",
-  "12": "Insurance Funds and ADL: The Backstop Political Economy",
+  "11": "Liquidation Cascades in Crypto Perps: Leverage Reflexivity",
+  "12": "ADL and Insurance Funds: How Perp Exchanges Socialize Losses",
   "13": "Price Discovery in Crypto Perpetual Futures Markets",
   "14": "Mark Price, Index Price, and Oracles: Governing Benchmarks",
   "16": "Funding Arbitrage and the Basis Trade: Efficiency Transmission",
@@ -33,6 +35,7 @@ export const SEO_TITLES: Record<string, string> = {
   "19": "Market Making in Perpetual Futures: Liquidity Games",
   "22": "Where Crypto Volatility Comes From: A Four-Source Decomposition",
   "26": "Regulating Crypto Derivatives: Between Innovation and Stability",
+  "27": "Stock, FX and Commodity Perps: Pricing Global Assets",
   "28": "Exchange Architecture: From Monolithic Black Box to Layers",
 };
 

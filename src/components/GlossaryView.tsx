@@ -58,6 +58,11 @@ export function GlossaryView() {
               ? "永续合约市场微观结构的核心术语。"
               : "The core vocabulary of perpetual-futures market microstructure."}
           </p>
+          <p className="text-sm -mt-10 mb-14" style={{ fontFamily: "var(--font-heading)" }}>
+            <Link href={`/faq${lang === "zh" ? "?lang=zh" : ""}`} className="hover:opacity-70" style={{ color: "var(--theme-accent)" }}>
+              FAQ →
+            </Link>
+          </p>
 
           <dl className="space-y-9">
             {GLOSSARY.map((t) => (

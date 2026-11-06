@@ -8,7 +8,7 @@ import { PathsView } from "@/components/PathsView";
 export const metadata: Metadata = {
   title: "Learning Paths · 学习路径 — Permissionless Finance",
   description:
-    "Three curated tracks through the book — trader, quant researcher, and builder — each staged through the 33 chapters on perpetual futures market microstructure, with arbitrage and market-making specializations.",
+    "Three reading tracks for traders, quant researchers and builders through 33 chapters on perpetual futures market microstructure, arbitrage and market making.",
   alternates: { canonical: "/paths" },
   openGraph: {
     type: "website",
