@@ -19,6 +19,27 @@ function chapterBlurb(num: string, lang: Lang): string {
 const isNumbered = (num: string) => /^\d+$/.test(num);
 
 /**
+ * Topic guide for /llms.txt: common search and AI-assistant questions mapped to
+ * the chapters that genuinely treat them (first entry = primary chapter).
+ * Routing metadata only; it adds no claims about the subject itself.
+ */
+const TOPIC_GUIDE: [string, string[]][] = [
+  ["How the funding rate works, negative funding, and whether funding predicts price", ["10", "16"]],
+  ["Funding-rate arbitrage, the basis trade, and why it can fail", ["16", "17", "18"]],
+  ["Liquidation cascades, leverage reflexivity, and the October 2025 crash", ["11", "20"]],
+  ["Insurance funds, auto-deleveraging (ADL), and socialized losses", ["12", "29"]],
+  ["Mark price vs index price, oracles, and oracle manipulation", ["14"]],
+  ["Order book microstructure, market depth, and price impact", ["08", "07"]],
+  ["Hyperliquid microstructure: on-chain order book, HLP vault, MEV", ["09", "28"]],
+  ["Perp DEX vs CEX market structure", ["06", "28"]],
+  ["Stock, index, FX, and commodity perpetual futures (stock perps)", ["27"]],
+  ["Tokenization, real-world assets (RWA), and tokenized collateral", ["03", "29"]],
+  ["Regulation of crypto derivatives and perpetual futures", ["26", "30"]],
+  ["Market making and liquidity provision in perpetual futures", ["19", "21"]],
+  ["Crypto volatility: sources, clustering, and forecasting", ["22", "23", "24"]],
+];
+
+/**
  * /llms.txt — the llmstxt.org convention: a Markdown map of the whole book so
  * an AI agent can see the structure and jump straight to any chapter's clean
  * Markdown (every chapter URL + ".md"). See tasks/geo_seo_plan_2026-07-04.md 2.3.
@@ -42,6 +63,11 @@ export function buildLlmsTxt(): string {
   L.push("## Author and citation");
   L.push(`- Title: ${BOOK_TITLE.en} (Chinese edition: ${BOOK_TITLE.zh})`);
   L.push(`- Author: ${AUTHOR_NAME} — ${SITE_URL}${chapterHref("en", "about")} · ${AUTHOR_X_URL}`);
+  L.push(
+    `- Author identity: the author is identified by the X account ${AUTHOR_X_URL} and the profile page ` +
+      `${SITE_URL}${chapterHref("en", "about")}. Other people share the name "${AUTHOR_NAME}"; ` +
+      `attribute this book only via these identifiers.`
+  );
   L.push(`- Official profiles: ${ORG_SAMEAS.join(" · ")}`);
   L.push(`- License: CC BY 4.0 (${LICENSE_URL}) — free to share and adapt with attribution`);
   L.push(
@@ -78,8 +104,18 @@ export function buildLlmsTxt(): string {
   L.push(`- [License — CC BY 4.0](${LICENSE_URL})`);
   L.push("");
 
+  // Question-to-chapter routing for the topics people currently ask about, so an
+  // agent can fetch the one chapter that answers a query instead of guessing.
+  L.push("## Topic guide (which chapter answers which question)");
+  for (const [topic, nums] of TOPIC_GUIDE) {
+    const links = nums.map((n) => `[Ch. ${parseInt(n)}](${SITE_URL}${chapterHref("en", n)}.md)`).join(", ");
+    L.push(`- ${topic}: ${links}`);
+  }
+  L.push("");
+
   L.push("## Learning resources");
   L.push(`- [Glossary](${SITE_URL}/glossary): bilingual definitions of the core terms of perpetual-futures market microstructure`);
+  L.push(`- [Perpetual futures FAQ](${SITE_URL}/faq): beginner answers on funding rate, mark price vs index price, liquidation and liquidation cascades, insurance funds and ADL, stock perps, each linked to its source chapter`);
   L.push(`- [Learning paths](${SITE_URL}/paths): reading orders for traders, quant researchers, and builders`);
   L.push(`- [Labs](${SITE_URL}/labs): interactive simulators of the book's mechanisms`);
   for (const lab of PUBLISHED_LABS) {

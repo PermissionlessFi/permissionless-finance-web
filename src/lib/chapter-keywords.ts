@@ -84,7 +84,20 @@ export function keywordThings(names: string[]): { "@type": "Thing"; name: string
   return names.map((name) => ({ "@type": "Thing", name }));
 }
 
+/**
+ * English-only search-intent additions, merged into CHAPTER_KEYWORDS.en
+ * right after the first two (primary) keywords.
+ * Kept separate so topical updates do not touch the localized lists.
+ */
+export const CHAPTER_KEYWORDS_EN_EXTRA: Record<string, string[]> = {
+  "03": ["RWA collateral", "tokenized Treasuries", "BUIDL"],
+  "27": ["equity perpetual futures", "stock perps", "commodity perpetual futures"],
+};
+
 /** Keyword array for a chapter in one language (empty for front matter). */
 export function chapterKeywords(num: string, lang: Lang): string[] {
-  return CHAPTER_KEYWORDS[num]?.[lang] ?? [];
+  const base = CHAPTER_KEYWORDS[num]?.[lang] ?? [];
+  if (lang !== "en") return base;
+  const extra = CHAPTER_KEYWORDS_EN_EXTRA[num] ?? [];
+  return [...base.slice(0, 2), ...extra.filter((k) => !base.includes(k)), ...base.slice(2)];
 }

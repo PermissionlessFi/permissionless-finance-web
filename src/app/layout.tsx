@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Source_Serif_4, Spectral, Noto_Serif_SC } from "next/font/google";
-import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, AUTHOR_NAME, SITE_X_HANDLE, AUTHOR_X_HANDLE } from "@/lib/site";
+import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, SITE_META_DESCRIPTION_EN, AUTHOR_NAME, SITE_X_HANDLE, AUTHOR_X_HANDLE } from "@/lib/site";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     default: `${SITE_NAME.en} — Perpetual Futures Microstructure`,
     template: "%s", // chapter pages supply their full title
   },
-  description: SITE_DESCRIPTION.en,
+  description: SITE_META_DESCRIPTION_EN,
   authors: [{ name: AUTHOR_NAME }],
   creator: AUTHOR_NAME,
   publisher: AUTHOR_NAME,
