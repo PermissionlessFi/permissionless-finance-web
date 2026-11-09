@@ -86,6 +86,12 @@ export const CHAPTER_FAQ: Record<string, Partial<Record<Lang, QA[]>>> = {
         a: "Anchoring degrades whenever arbitrage is impeded—by capital constraints, exchange or on-chain congestion, or extreme market stress. In a liquidation cascade, forced selling can overwhelm the incentive the rate provides, so that convergence fails even at extreme rate levels. This breaking point marks the transition at which leverage and liquidation risk supplant the funding game as the dominant force in the market—the subject of the following chapter.",
       },
     ],
+    zh: [
+      { q: `永续合约为什么需要资金费率？`, a: `永续合约没有到期与交割，套利无法借此迫使其价格向现货收敛。资金费率以经济方式提供这种收敛压力：在每个结算周期，它在市场两侧之间转移一笔现金流——合约价格高于现货指数时，多头向空头支付；低于现货指数时，空头向多头支付。这一周期性转移对造成偏离的一方施加持仓成本，从而形成促使合约价格回归标的的激励。` },
+      { q: `负资金费率意味着什么？`, a: `负资金费率表示空头向多头支付。它出现在永续合约价格低于现货指数——即负基差——之时，通常对应看空头寸占主导的市场状况。通过对空头头寸施加成本、对多头头寸给予补偿，它旨在吸引套利资本入场，推动永续价格回归现货。` },
+      { q: `资金费率能否预测价格走势？`, a: `本章与其说把资金费率视为收益的直接预测指标，不如说把它视为衡量市场杠杆的状态变量。费率的水平、波动及其跨资产的费率曲面共同指示杠杆周期所处的阶段，并可识别易于引发剧烈波动的市场条件；然而，其对未来收益的独立预测能力受到有充分文献记录的实证局限。` },
+      { q: `锚定机制在什么条件下会失效？`, a: `每当套利受阻——无论源于资本约束、交易所或链上拥堵，还是极端市场压力——锚定都会减弱。在清算级联中，强制抛售可能压倒费率所提供的激励，使得即便费率处于极端水平，收敛依然失败。这一断裂点标志着杠杆与清算风险取代资金费率博弈、成为市场主导力量的转折——这正是下一章的主题。` },
+    ],
   },
   "11": {
     en: [

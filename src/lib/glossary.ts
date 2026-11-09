@@ -240,6 +240,11 @@ export const GLOSSARY: GlossaryTerm[] = [
     defZh: "无需实际持有标的资产即复制其价格敞口——通过为合约缴纳保证金、而非买入、托管与交割获得——这一概念支撑了“资金费率锚定是通用、与资产无关的定价机制”之论断。",
   },
   {
+    id: "stock-perpetual-futures", en: "Stock perpetual futures (stock perps)", zh: "股票永续合约", chapters: ["27"],
+    defEn: "Perpetual futures whose underlying is a single stock or an equity index (for example TSLA or the S&P 500): synthetic, round-the-clock price exposure without owning the shares, anchored to the underlying's reference price by the funding rate rather than by expiry or delivery—offered either by regulated centralized exchanges or by permissionless on-chain protocols.",
+    defZh: "以单只股票或股票指数（如 TSLA 或标普 500）为标的的永续合约：无需持有股票即可获得全天候的合成价格敞口，依靠资金费率而非到期或交割锚定于标的的参考价格——既可由受监管的中心化交易所提供，也可由无需许可的链上协议提供。",
+  },
+  {
     id: "matching-engine", en: "Matching engine", zh: "撮合引擎", chapters: ["28"],
     defEn: "The component of a trading system that pairs buy and sell orders under price-time priority, transforming resting and incoming orders into executed trades—centralized and microsecond-fast in a monolithic exchange, yet constrained by after-the-fact cryptographic verifiability in a layered one.",
     defZh: "交易系统中按价格-时间优先撮合买卖订单、把挂单与来单转化为成交的组件——在单体交易所中中心化且达微秒级，在分层架构中则受事后密码学可验证性约束。",

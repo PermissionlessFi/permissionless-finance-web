@@ -11,8 +11,8 @@ import { getChapterMeta } from "./toc";
  * The manuscript (content/) is never read or changed by this module.
  *
  * Target: high-volume beginner queries (funding rate, mark price vs index
- * price, liquidation, liquidation cascade, ADL, funding-rate arbitrage) that
- * today resolve to exchange help centres rather than to the book.
+ * price, liquidation, liquidation cascade, ADL, funding-rate arbitrage, stock
+ * perps) that today resolve to exchange help centres rather than to the book.
  */
 
 type Ref =
@@ -89,6 +89,19 @@ const SECTIONS: SectionDef[] = [
       faq("12", 1),
       faq("12", 2),
       term("socialized-loss", "What is a socialized loss?"),
+    ],
+  },
+  {
+    id: "stock-perps",
+    titleEn: "Stock perps and perpetual futures on traditional assets",
+    zhTermIds: ["stock-perpetual-futures", "synthetic-exposure"],
+    items: [
+      term("stock-perpetual-futures", "What are stock perpetual futures (stock perps)?"),
+      faq("27", 1),
+      faq("27", 0),
+      term("synthetic-exposure", "What is synthetic exposure?"),
+      faq("27", 2),
+      faq("27", 3),
     ],
   },
 ];
