@@ -6,7 +6,7 @@ import { FaqView } from "@/components/FaqView";
 
 const TITLE = "Perpetual Futures FAQ: Funding Rate, Mark Price, Liquidation, ADL";
 const DESCRIPTION =
-  "Beginner answers on perpetual futures: what the funding rate is, mark price vs index price, liquidation and liquidation cascades, ADL, and funding-rate arbitrage.";
+  "Beginner answers on perpetual futures: the funding rate, mark price vs index price, liquidation cascades, ADL, funding-rate arbitrage, and stock perps.";
 
 export const metadata: Metadata = {
   title: `${TITLE} — ${SITE_NAME.en}`,
