@@ -24,8 +24,8 @@ const ROUTES = {
   "/labs/survivor": ["src/components/labs/SurvivorGame.tsx"],
   "/download": ["src/app/download/page.tsx", "src/components/DownloadView.tsx", "src/lib/external.ts"],
   "/problems": ["src/app/problems/page.tsx", "src/components/ProblemsView.tsx"],
-  "/glossary": ["src/app/glossary/page.tsx", "src/components/GlossaryView.tsx", "src/lib/glossary.ts"],
-  "/faq": ["src/app/faq/page.tsx", "src/components/FaqView.tsx", "src/lib/beginner-faq.ts", "src/lib/faq.ts", "src/lib/glossary.ts"],
+  "/glossary": ["src/app/glossary/page.tsx", "src/app/zh/glossary/page.tsx", "src/components/GlossaryView.tsx", "src/lib/glossary.ts", "src/lib/hub-pages.ts"],
+  "/faq": ["src/app/faq/page.tsx", "src/app/zh/faq/page.tsx", "src/components/FaqView.tsx", "src/lib/beginner-faq.ts", "src/lib/faq.ts", "src/lib/glossary.ts", "src/lib/hub-pages.ts"],
   "/community": ["src/app/community/page.tsx", "src/components/CommunityView.tsx"],
   "/support": ["src/app/support/page.tsx", "src/components/SupportView.tsx"],
 };

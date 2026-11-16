@@ -114,8 +114,8 @@ export function buildLlmsTxt(): string {
   L.push("");
 
   L.push("## Learning resources");
-  L.push(`- [Glossary](${SITE_URL}/glossary): bilingual definitions of the core terms of perpetual-futures market microstructure`);
-  L.push(`- [Perpetual futures FAQ](${SITE_URL}/faq): beginner answers on funding rate, mark price vs index price, liquidation and liquidation cascades, insurance funds and ADL, stock perps, each linked to its source chapter`);
+  L.push(`- [Glossary](${SITE_URL}/glossary) · [术语表](${SITE_URL}/zh/glossary): bilingual definitions of the core terms of perpetual-futures market microstructure`);
+  L.push(`- [Perpetual futures FAQ](${SITE_URL}/faq) · [永续合约常见问题](${SITE_URL}/zh/faq): beginner answers on funding rate, mark price vs index price, liquidation and liquidation cascades, insurance funds and ADL, stock perps, each linked to its source chapter`);
   L.push(`- [Learning paths](${SITE_URL}/paths): reading orders for traders, quant researchers, and builders`);
   L.push(`- [Labs](${SITE_URL}/labs): interactive simulators of the book's mechanisms`);
   for (const lab of PUBLISHED_LABS) {

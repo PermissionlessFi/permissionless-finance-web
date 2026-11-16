@@ -1,5 +1,6 @@
 import { Lang } from "./types";
 import { chapterHref } from "./keywords";
+import { hubHref } from "./hub-pages";
 
 export type Group = "book" | "other";
 
@@ -38,6 +39,7 @@ export const PILLARS: Pillar[] = [
       { key: "contents", zh: "目录", en: "Contents",         descZh: "全书目录，按篇章分组",         descEn: "The full table of contents",              group: "book",  href: (l) => `/contents?lang=${l}` },
       { key: "paths", zh: "学习路径", en: "Learning paths",  descZh: "交易者 · 量化 · 构建者三轨",     descEn: "Trader · quant · builder tracks",         group: "book",  href: (l) => `/paths?lang=${l}` },
       { key: "download", zh: "下载全书", en: "Download",     descZh: "PDF / EPUB，中英双语，免费",     descEn: "Free PDF & EPUB, both languages",         group: "book",  href: (l) => `/download?lang=${l}` },
+      { key: "faq", zh: "入门问答", en: "FAQ", descZh: "资金费率、标记价格、清算、ADL、股票永续", descEn: "Funding rate, mark price, liquidation, ADL, stock perps", group: "book", href: (l) => hubHref(l, "faq") },
       { key: "labs",  zh: "实验室",   en: "Labs",            descZh: "交互模拟器：改一个参数看清算级联", descEn: "Interactive simulators of the book's mechanisms", group: "other", href: (l) => `/labs?lang=${l}` },
     ],
   },
@@ -51,7 +53,7 @@ export const PILLARS: Pillar[] = [
   {
     key: "research", zh: "研究", en: "Research", color: "#3f6cb3",
     items: [
-      { key: "glossary", zh: "术语表",     en: "Glossary",       descZh: "核心术语的定义",               descEn: "Definitions of the core terms",             href: (l) => `/glossary?lang=${l}` },
+      { key: "glossary", zh: "术语表",     en: "Glossary",       descZh: "核心术语的定义",               descEn: "Definitions of the core terms",             href: (l) => hubHref(l, "glossary") },
       { key: "problems", zh: "开放问题",   en: "Open problems",  descZh: "每一篇留下的未解问题",         descEn: "The open questions each part ends on",       group: "other", href: (l) => `/problems?lang=${l}` },
     ],
   },
