@@ -36,11 +36,11 @@ export const PILLARS: Pillar[] = [
     key: "learn", zh: "学习", en: "Learning", color: "#b0703b",
     items: [
       { key: "read",  zh: "阅读全书", en: "Read the book",   descZh: "全书 33 章，配 AI 辅导",       descEn: "All 33 chapters, with an AI tutor",       group: "book",  href: (l) => chapterHref(l, "01") },
-      { key: "contents", zh: "目录", en: "Contents",         descZh: "全书目录，按篇章分组",         descEn: "The full table of contents",              group: "book",  href: (l) => `/contents?lang=${l}` },
-      { key: "paths", zh: "学习路径", en: "Learning paths",  descZh: "交易者 · 量化 · 构建者三轨",     descEn: "Trader · quant · builder tracks",         group: "book",  href: (l) => `/paths?lang=${l}` },
-      { key: "download", zh: "下载全书", en: "Download",     descZh: "PDF / EPUB，中英双语，免费",     descEn: "Free PDF & EPUB, both languages",         group: "book",  href: (l) => `/download?lang=${l}` },
+      { key: "contents", zh: "目录", en: "Contents",         descZh: "全书目录，按篇章分组",         descEn: "The full table of contents",              group: "book",  href: (l) => hubHref(l, "contents") },
+      { key: "paths", zh: "学习路径", en: "Learning paths",  descZh: "交易者 · 量化 · 构建者三轨",     descEn: "Trader · quant · builder tracks",         group: "book",  href: (l) => hubHref(l, "paths") },
+      { key: "download", zh: "下载全书", en: "Download",     descZh: "PDF / EPUB，中英双语，免费",     descEn: "Free PDF & EPUB, both languages",         group: "book",  href: (l) => hubHref(l, "download") },
       { key: "faq", zh: "入门问答", en: "FAQ", descZh: "资金费率、标记价格、清算、ADL、股票永续", descEn: "Funding rate, mark price, liquidation, ADL, stock perps", group: "book", href: (l) => hubHref(l, "faq") },
-      { key: "labs",  zh: "实验室",   en: "Labs",            descZh: "交互模拟器：改一个参数看清算级联", descEn: "Interactive simulators of the book's mechanisms", group: "other", href: (l) => `/labs?lang=${l}` },
+      { key: "labs",  zh: "实验室",   en: "Labs",            descZh: "交互模拟器：改一个参数看清算级联", descEn: "Interactive simulators of the book's mechanisms", group: "other", href: (l) => hubHref(l, "labs") },
     ],
   },
   {

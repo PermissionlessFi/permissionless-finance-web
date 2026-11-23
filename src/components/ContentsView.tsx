@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import Link from "next/link";
 import { PARTS } from "@/lib/toc";
 import { chapterHref } from "@/lib/keywords";
@@ -9,6 +8,7 @@ import { SITE_NAME } from "@/lib/site";
 import { TopNav } from "./TopNav";
 import { LogoLockup } from "./BrandLogo";
 import { Lang } from "@/lib/types";
+import { useHubLang } from "./useHubLang";
 
 function firstSentence(t: string): string {
   const m = t.match(/^.*?[.。](?=\s|$)/);
@@ -18,12 +18,8 @@ function firstSentence(t: string): string {
 /** Full table of contents — every chapter grouped by part with a one-line
  *  definition summary. Puts all 33 chapters two hops from home (a strong
  *  internal-linking / crawl-depth signal). Language-aware like the glossary. */
-export function ContentsView() {
-  const [lang, setLang] = useState<Lang>("en");
-  useEffect(() => {
-    const q = new URLSearchParams(window.location.search).get("lang");
-    if (q === "zh" || q === "en") setLang(q);
-  }, []);
+export function ContentsView({ initialLang = "en" }: { initialLang?: Lang }) {
+  const { lang, onLangChange } = useHubLang(initialLang, "/contents", "/zh/contents");
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -32,7 +28,7 @@ export function ContentsView() {
         style={{ backgroundColor: "var(--theme-header-bg)", transition: "background-color 0.3s ease" }}
       >
         <LogoLockup markWidth={44} className="ml-2" />
-        <TopNav lang={lang} onLangChange={setLang} />
+        <TopNav lang={lang} onLangChange={onLangChange} />
       </header>
 
       <main className="flex-1 px-6 pb-16" style={{ color: "var(--theme-text)" }}>
@@ -42,7 +38,7 @@ export function ContentsView() {
             className="text-sm hover:opacity-70 transition-opacity"
             style={{ fontFamily: "var(--font-heading)", color: "var(--theme-text-muted)" }}
           >
-            ← {SITE_NAME.en}
+            ← {SITE_NAME[lang]}
           </Link>
 
           <h1
