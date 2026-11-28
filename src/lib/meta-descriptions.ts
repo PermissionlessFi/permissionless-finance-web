@@ -29,7 +29,7 @@ export const META_DESCRIPTIONS: Record<string, Partial<Record<Lang, string>>> = 
     zh: "关于《无需许可的金融》作者 Eric Cheung：博士、交易员与区块链研发实践者，从市场与技术两端书写永续合约的市场微观结构。",
   },
   "01": {
-    en: "A digital asset is a cryptographic instrument whose custody, transfer, and settlement run on protocol code and consensus instead of financial intermediaries.",
+    en: "Digital asset products vs. traditional financial products: six properties that compress the intermediary trust tax, and the new risk surface that replaces it.",
   },
   "02": {
     en: "A perpetual future is a leveraged derivative with no expiry or delivery, kept anchored to the spot index by a periodic funding payment between longs and shorts.",
