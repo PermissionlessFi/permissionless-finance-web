@@ -21,6 +21,7 @@ const VALID_NUMS = new Set(ALL_CHAPTERS.map((c) => c.num));
 /** EN <title> overrides — front-load target keywords (H1 keeps the book title).
  *  Chapters absent here already carry their keyword in the original title. */
 export const SEO_TITLES: Record<string, string> = {
+  "01": "Digital Assets vs. Traditional Financial Products",
   "02": "Perpetual Futures: History and the Rise of Crypto Derivatives",
   "03": "RWA Tokenization, BUIDL Collateral and On-Chain Finance",
   "06": "Perp DEX vs CEX: The Evolution of Market Structure",
