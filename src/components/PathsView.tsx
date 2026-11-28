@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import Link from "next/link";
 import { LEARNING_PATHS } from "@/lib/paths";
 import { getChapterMeta } from "@/lib/toc";
@@ -8,18 +7,15 @@ import { chapterHref } from "@/lib/keywords";
 import { TopNav } from "./TopNav";
 import { LogoLockup } from "./BrandLogo";
 import { Lang } from "@/lib/types";
+import { useHubLang } from "./useHubLang";
 
 /**
  * Learning paths — the site's core engine. Three identity-first tracks;
  * each stage links straight into the book. The quant track forks into two
  * specializations at the end. Language-aware like contents/glossary.
  */
-export function PathsView() {
-  const [lang, setLang] = useState<Lang>("en");
-  useEffect(() => {
-    const q = new URLSearchParams(window.location.search).get("lang");
-    if (q === "zh" || q === "en") setLang(q);
-  }, []);
+export function PathsView({ initialLang = "en" }: { initialLang?: Lang }) {
+  const { lang, onLangChange } = useHubLang(initialLang, "/paths", "/zh/paths");
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -28,7 +24,7 @@ export function PathsView() {
         style={{ backgroundColor: "var(--theme-header-bg)", transition: "background-color 0.3s ease" }}
       >
         <LogoLockup markWidth={44} className="ml-2" />
-        <TopNav lang={lang} onLangChange={setLang} />
+        <TopNav lang={lang} onLangChange={onLangChange} />
       </header>
 
       <main className="flex-1 px-6 pb-20" style={{ color: "var(--theme-text)" }}>

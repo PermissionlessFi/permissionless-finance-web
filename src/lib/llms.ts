@@ -114,10 +114,12 @@ export function buildLlmsTxt(): string {
   L.push("");
 
   L.push("## Learning resources");
-  L.push(`- [Glossary](${SITE_URL}/glossary): bilingual definitions of the core terms of perpetual-futures market microstructure`);
-  L.push(`- [Perpetual futures FAQ](${SITE_URL}/faq): beginner answers on funding rate, mark price vs index price, liquidation and liquidation cascades, insurance funds and ADL, stock perps, each linked to its source chapter`);
-  L.push(`- [Learning paths](${SITE_URL}/paths): reading orders for traders, quant researchers, and builders`);
-  L.push(`- [Labs](${SITE_URL}/labs): interactive simulators of the book's mechanisms`);
+  L.push(`- [Glossary](${SITE_URL}/glossary) · [术语表](${SITE_URL}/zh/glossary): bilingual definitions of the core terms of perpetual-futures market microstructure`);
+  L.push(`- [Perpetual futures FAQ](${SITE_URL}/faq) · [永续合约常见问题](${SITE_URL}/zh/faq): beginner answers on funding rate, mark price vs index price, liquidation and liquidation cascades, insurance funds and ADL, stock perps, each linked to its source chapter`);
+  L.push(`- [Contents](${SITE_URL}/contents) · [目录](${SITE_URL}/zh/contents): the full table of contents, 33 chapters across ten parts`);
+  L.push(`- [Learning paths](${SITE_URL}/paths) · [学习路径](${SITE_URL}/zh/paths): reading orders for traders, quant researchers, and builders`);
+  L.push(`- [Download the book](${SITE_URL}/download) · [下载全书](${SITE_URL}/zh/download): free PDF and EPUB, English and Chinese, CC BY 4.0`);
+  L.push(`- [Labs](${SITE_URL}/labs) · [实验室](${SITE_URL}/zh/labs): interactive simulators of the book's mechanisms`);
   for (const lab of PUBLISHED_LABS) {
     L.push(`  - [${lab.en}](${SITE_URL}/labs/${lab.slug}): ${lab.learnEn}`);
   }

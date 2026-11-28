@@ -1,33 +1,30 @@
 "use client";
 
-import { useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { chapterHref } from "@/lib/keywords";
+import { hubHref } from "@/lib/hub-pages";
 import { SITE_NAME } from "@/lib/site";
 import type { FaqSection } from "@/lib/beginner-faq";
 import { TopNav } from "./TopNav";
 import { LogoLockup } from "./BrandLogo";
 import { Lang } from "@/lib/types";
+import { useHubLang } from "./useHubLang";
 
 /**
- * Beginner FAQ reading view (/faq). The data is resolved on the server from
- * faq.ts and glossary.ts and passed in as props, so only the curated subset
- * ships to the client. English by default; `?lang=zh` (or the settings toggle)
- * shows the Chinese source text where it exists. Every answer links to the
- * chapter it comes from.
+ * Beginner FAQ reading view (/faq and /zh/faq). The data is resolved on the
+ * server from faq.ts and glossary.ts and passed in as props, so only the
+ * curated subset ships to the client. `initialLang` comes from the route so
+ * the first HTML paint is already in the right language. Every answer links
+ * to the chapter it comes from.
  */
-const noopSubscribe = () => () => {};
-
-export function FaqView({ sections }: { sections: FaqSection[] }) {
-  // ?lang=zh is read without a setState-in-effect: the server snapshot is
-  // English (static HTML), the client snapshot reads the query string.
-  const langParam = useSyncExternalStore(
-    noopSubscribe,
-    () => new URLSearchParams(window.location.search).get("lang"),
-    () => null
-  );
-  const [override, setLang] = useState<Lang | null>(null);
-  const lang: Lang = override ?? (langParam === "zh" ? "zh" : "en");
+export function FaqView({
+  sections,
+  initialLang = "en",
+}: {
+  sections: FaqSection[];
+  initialLang?: Lang;
+}) {
+  const { lang, onLangChange } = useHubLang(initialLang, "/faq", "/zh/faq");
   const zh = lang === "zh";
 
   return (
@@ -37,7 +34,7 @@ export function FaqView({ sections }: { sections: FaqSection[] }) {
         style={{ backgroundColor: "var(--theme-header-bg)", transition: "background-color 0.3s ease" }}
       >
         <LogoLockup markWidth={44} className="ml-2" />
-        <TopNav lang={lang} onLangChange={setLang} />
+        <TopNav lang={lang} onLangChange={onLangChange} />
       </header>
 
       <main className="flex-1 px-6 pb-20" style={{ color: "var(--theme-text)" }}>
@@ -54,17 +51,16 @@ export function FaqView({ sections }: { sections: FaqSection[] }) {
             className="text-4xl font-bold mt-6 mb-3"
             style={{ fontFamily: "var(--font-heading)", color: "var(--theme-heading)" }}
           >
-            {zh ? `${sections[0]?.titleZh ?? ""} FAQ` : "Perpetual Futures FAQ"}
+            {zh ? "永续合约常见问题" : "Perpetual Futures FAQ"}
           </h1>
-          {!zh && (
-            <p
-              className="text-[0.95rem] leading-relaxed mb-8"
-              style={{ fontFamily: "var(--font-serif)", color: "var(--theme-text-secondary)" }}
-            >
-              Short answers to the most common beginner questions about perpetual futures, taken from the
-              book&apos;s chapters and glossary. Each answer links to the chapter that develops it in depth.
-            </p>
-          )}
+          <p
+            className="text-[0.95rem] leading-relaxed mb-8"
+            style={{ fontFamily: "var(--font-serif)", color: "var(--theme-text-secondary)" }}
+          >
+            {zh
+              ? "以下是关于永续合约最常见的入门问题，答案取自本书各章与术语表。每个答案都链接到展开论述该问题的章节。"
+              : "Short answers to the most common beginner questions about perpetual futures, taken from the book's chapters and glossary. Each answer links to the chapter that develops it in depth."}
+          </p>
 
           <nav aria-label="FAQ topics" className="mb-12">
             <ul className="flex flex-wrap gap-2 text-sm" style={{ fontFamily: "var(--font-heading)" }}>
@@ -81,11 +77,11 @@ export function FaqView({ sections }: { sections: FaqSection[] }) {
               ))}
               <li>
                 <Link
-                  href={`/glossary${zh ? "?lang=zh" : ""}`}
+                  href={hubHref(lang, "glossary")}
                   className="inline-block px-3 py-1 rounded-full border hover:opacity-70"
                   style={{ borderColor: "var(--theme-border)", color: "var(--theme-accent)" }}
                 >
-                  {zh ? "Glossary" : "Full glossary"} →
+                  {zh ? "术语表" : "Full glossary"} →
                 </Link>
               </li>
             </ul>
@@ -135,11 +131,11 @@ export function FaqView({ sections }: { sections: FaqSection[] }) {
                           </Link>
                           {it.termId && (
                             <Link
-                              href={`/glossary${zh ? "?lang=zh" : ""}#${it.termId}`}
+                              href={hubHref(lang, "glossary", it.termId)}
                               className="ml-3 hover:opacity-70"
                               style={{ color: "var(--theme-text-muted)" }}
                             >
-                              Glossary →
+                              {zh ? "术语表" : "Glossary"} →
                             </Link>
                           )}
                         </p>

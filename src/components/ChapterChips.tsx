@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import Link from "next/link";
 import { CHAPTER_ABSTRACTS } from "@/lib/chapter-abstracts";
 import { keyTermsForChapter } from "@/lib/glossary";
+import { hubHref } from "@/lib/hub-pages";
 import { RevealRow } from "./RevealRow";
 import { Lang } from "@/lib/types";
 
@@ -43,7 +44,7 @@ export function ChapterChips({ lang, num }: { lang: Lang; num: string }) {
           {terms.map((t) => (
             <Link
               key={t.id}
-              href={`/glossary?lang=${lang}#${t.id}`}
+              href={hubHref(lang, "glossary", t.id)}
               className="rounded-md border px-2.5 py-1 text-sm transition-opacity hover:opacity-80"
               style={{ borderColor: "var(--theme-border)", color: "var(--theme-text-secondary)" }}
             >

@@ -1,28 +1,24 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import Link from "next/link";
 import { GLOSSARY } from "@/lib/glossary";
 import { chapterHref } from "@/lib/keywords";
+import { hubHref } from "@/lib/hub-pages";
 import { SITE_NAME } from "@/lib/site";
 import { TopNav } from "./TopNav";
 import { LogoLockup } from "./BrandLogo";
 import { Lang } from "@/lib/types";
+import { useHubLang } from "./useHubLang";
 
 /**
- * Glossary reading view. Shows ONE language at a time (selected in the nav's
- * settings), never both. Defaults to English (site default); a `?lang=zh|en`
- * query — set by each chapter's "Key terms" deep-link — picks the initial
- * language so a Chinese reader lands on the Chinese glossary. The bilingual
- * DefinedTermSet JSON-LD lives in the server page, unaffected by the toggle.
+ * Glossary reading view (/glossary and /zh/glossary). Shows ONE language at a
+ * time, never both. `initialLang` comes from the route so the first HTML paint
+ * is already in the right language. Old `?lang=zh` deep-links from chapter
+ * "Key terms" are replaced with /zh/glossary, hash preserved. The DefinedTermSet
+ * JSON-LD lives in the server page.
  */
-export function GlossaryView() {
-  const [lang, setLang] = useState<Lang>("en");
-
-  useEffect(() => {
-    const q = new URLSearchParams(window.location.search).get("lang");
-    if (q === "zh" || q === "en") setLang(q);
-  }, []);
+export function GlossaryView({ initialLang = "en" }: { initialLang?: Lang }) {
+  const { lang, onLangChange } = useHubLang(initialLang, "/glossary", "/zh/glossary");
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -31,7 +27,7 @@ export function GlossaryView() {
         style={{ backgroundColor: "var(--theme-header-bg)", transition: "background-color 0.3s ease" }}
       >
         <LogoLockup markWidth={44} className="ml-2" />
-        <TopNav lang={lang} onLangChange={setLang} />
+        <TopNav lang={lang} onLangChange={onLangChange} />
       </header>
 
       <main className="flex-1 px-6 pb-16" style={{ color: "var(--theme-text)" }}>
@@ -41,7 +37,7 @@ export function GlossaryView() {
             className="text-sm hover:opacity-70 transition-opacity"
             style={{ fontFamily: "var(--font-heading)", color: "var(--theme-text-muted)" }}
           >
-            ← {SITE_NAME.en}
+            ← {SITE_NAME[lang]}
           </Link>
 
           <h1
@@ -59,8 +55,8 @@ export function GlossaryView() {
               : "The core vocabulary of perpetual-futures market microstructure."}
           </p>
           <p className="text-sm -mt-10 mb-14" style={{ fontFamily: "var(--font-heading)" }}>
-            <Link href={`/faq${lang === "zh" ? "?lang=zh" : ""}`} className="hover:opacity-70" style={{ color: "var(--theme-accent)" }}>
-              FAQ →
+            <Link href={hubHref(lang, "faq")} className="hover:opacity-70" style={{ color: "var(--theme-accent)" }}>
+              {lang === "zh" ? "常见问题" : "FAQ"} →
             </Link>
           </p>
 

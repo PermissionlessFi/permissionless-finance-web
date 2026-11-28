@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import Link from "next/link";
 import { DOWNLOADS } from "@/lib/external";
 import { TopNav } from "./TopNav";
 import { LogoLockup } from "./BrandLogo";
 import { Lang } from "@/lib/types";
+import { useHubLang } from "./useHubLang";
 
 /**
  * Download the book — PDF and EPUB, both languages. Slots read from
@@ -13,12 +13,8 @@ import { Lang } from "@/lib/types";
  * CC BY 4.0; the page links the license and changelog rather than repeating
  * them.
  */
-export function DownloadView() {
-  const [lang, setLang] = useState<Lang>("en");
-  useEffect(() => {
-    const q = new URLSearchParams(window.location.search).get("lang");
-    if (q === "zh" || q === "en") setLang(q);
-  }, []);
+export function DownloadView({ initialLang = "en" }: { initialLang?: Lang }) {
+  const { lang, onLangChange } = useHubLang(initialLang, "/download", "/zh/download");
 
   const zh = lang === "zh";
 
@@ -47,7 +43,7 @@ export function DownloadView() {
         style={{ backgroundColor: "var(--theme-header-bg)", transition: "background-color 0.3s ease" }}
       >
         <LogoLockup markWidth={44} className="ml-2" />
-        <TopNav lang={lang} onLangChange={setLang} />
+        <TopNav lang={lang} onLangChange={onLangChange} />
       </header>
 
       <main className="flex-1 px-6 pb-20" style={{ color: "var(--theme-text)" }}>
