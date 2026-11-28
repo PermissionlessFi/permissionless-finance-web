@@ -79,7 +79,7 @@ export const META_DESCRIPTIONS: Record<string, Partial<Record<Lang, string>>> = 
     en: "Market anomalies in perpetual futures: price deviations that persist and stay statistically and economically significant after modelable arbitrage costs.",
   },
   "19": {
-    en: "Market making is the professional production of liquidity: posting competitive bid and ask quotes to earn the spread in exchange for bearing quantifiable risk.",
+    en: "Liquidity is not inherent in perpetual futures; it is a scarce resource produced by market makers in a strategic game, at a cost that rises when demand peaks.",
   },
   "21": {
     en: "Liquidity governance: how to secure continuous order-book depth when the private incentive to supply it collapses precisely as demand for liquidity peaks.",
